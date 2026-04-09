@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea'
 export function Step4() {
   const { control } = useFormContext()
   const beneficios = useWatch({ control, name: 'beneficios' }) || []
+  const juridicoProcesso = useWatch({ control, name: 'juridicoProcesso' })
 
   const showJuridico = beneficios.includes('Suporte jurídico')
   const showPrevidenciario = beneficios.includes('Suporte previdenciário')
@@ -105,7 +106,7 @@ export function Step4() {
               </FormItem>
             )}
           />
-          {useWatch({ control, name: 'juridicoProcesso' }) === 'sim' && (
+          {juridicoProcesso === 'sim' && (
             <FormInput
               control={control}
               name="juridicoProcessoStatus"
