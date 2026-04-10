@@ -2,7 +2,7 @@ import { supabase } from '@/lib/supabase/client'
 
 export async function submitPreCadastro(data: any) {
   try {
-    const { error } = await supabase.from('pre_cadastros' as any).insert({
+    const { error } = await supabase.from('pre_cadastros').insert({
       nome: data.nome,
       cpf: data.cpf,
       whatsapp: data.whatsapp,
@@ -18,10 +18,10 @@ export async function submitPreCadastro(data: any) {
       segmento: data.segmento,
       regioes: data.regiao || [],
       beneficios_interesse: data.beneficios || [],
-      interesse_convenios: !!data.interesseConvenios,
-      interesse_seguros: !!data.interesseSeguros,
-      interesse_capacitacao: !!data.interesseCapacitacao,
-      interesse_representacao: !!data.interesseRepresentacao,
+      interesse_convenios: data.beneficios?.includes('convenios') || false,
+      interesse_seguros: data.beneficios?.includes('seguros') || false,
+      interesse_capacitacao: data.beneficios?.includes('capacitacao') || false,
+      interesse_representacao: data.beneficios?.includes('representacao') || false,
       temas_juridicos: data.juridicoTema || [],
       prioridade_juridica: data.juridicoPrioridade || null,
       processo_andamento: data.juridicoProcesso || null,
