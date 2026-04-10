@@ -13,7 +13,7 @@ import {
   UserPlus,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import logoUrl from '@/assets/logo-com-fundo-transp3-32f8e.jpg'
+import logoUrl from '@/assets/logo-com-fundo-transp3-copia-59d64.jpg'
 
 function TransparentLogo({
   src,
@@ -167,7 +167,7 @@ export default function Index() {
               src={logoUrl}
               alt="Símbolo AMMA"
               cropRatio={1}
-              className="w-48 md:w-64 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-6"
+              className="w-32 md:w-40 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-6"
             />
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center">
