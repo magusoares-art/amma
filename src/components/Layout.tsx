@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
-import logoUrl from '@/assets/logo-com-fundo-transp2-4518a.jpg'
+import logoUrl from '@/assets/logo-com-fundo-transp3-32f8e.jpg'
 
 export default function Layout() {
   const location = useLocation()
