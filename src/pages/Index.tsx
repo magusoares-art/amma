@@ -131,19 +131,19 @@ const CARDS = [
     icon: <GraduationCap className="w-8 h-8 text-primary" />,
     title: 'Capacitação',
     description:
-      'Acesso a programas de bolsas de estudo e cursos técnicos, como o curso de Técnico em Manutenção de Aeronaves. Promoção de eventos técnicos, palestras e workshops. Compartilhamento de conteúdo sobre atualização normativa da ANAC e boas práticas de manutenção. Acesso a Simulador de Voo com valores abaixo dos praticados no mercado.',
+      'Acesso a programas de bolsas de estudo e cursos técnicos de manutenção. Promoção de eventos, palestras e workshops. Compartilhamento de conteúdo sobre atualização normativa da ANAC e boas práticas de manutenção. Acesso a Simulador de Voo com valores abaixo dos praticados no mercado.',
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-primary" />,
     title: 'Suporte Previdenciário',
     description:
-      'Suporte integral da assistente social da associação para requerimento de auxílios (doença, acidente), aposentadorias (comum, especial, por invalidez) e regularização junto ao INSS.',
+      'Suporte integral da assistente social da associação para requerimento de auxílios (doença, acidente), aposentadorias (comum, especial, por invalidez) e regularização junto ao INSS. Acompanhamento de processos e suporte durante tramitações no INSS.',
   },
   {
     icon: <Scale className="w-8 h-8 text-primary" />,
     title: 'Suporte Jurídico',
     description:
-      'Suporte jurídico especializado através de parceria com escritório de advocacia renomado, para questões trabalhistas, previdenciárias e contratuais. Orientação técnica para elaboração do Estatuto Social e trâmites de registro em cartório e obtenção de CNPJ. Modelos de documentos, atas e regulamentos internos adaptados à realidade da aviação civil.',
+      'Suporte jurídico especializado por meio de parceria com escritório de advocacia renomado, com atuação em questões trabalhistas, previdenciárias, civis e contratuais. Orientações técnicas e modelos de documentos, atas e regulamentos internos personalizados à realidade da aviação civil.',
   },
 ]
 
