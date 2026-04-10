@@ -10,31 +10,38 @@ export async function submitPreCadastro(data: any) {
       cidade: data.cidade,
       uf: data.uf,
       canal_contato: data.canalContato,
-      situacao_profissional: data.situacaoProfissional,
-      area_atuacao: data.areaAtuacao,
-      licenca: data.licenca || null,
+      situacao_profissional: data.situacao || 'Não informada',
+      area_atuacao: data.area || 'Não informada',
+      licenca: data.canac || null,
       empresa: data.empresa || null,
-      tempo_atuacao: data.tempoAtuacao,
-      segmento: data.segmento,
+      tempo_atuacao: data.tempoAtuacao || 'Não informado',
+      segmento: data.segmento || 'Não informado',
       regioes: data.regiao || [],
       beneficios_interesse: data.beneficios || [],
-      interesse_convenios: data.beneficios?.includes('convenios') || false,
-      interesse_seguros: data.beneficios?.includes('seguros') || false,
-      interesse_capacitacao: data.beneficios?.includes('capacitacao') || false,
-      interesse_representacao: data.beneficios?.includes('representacao') || false,
+      interesse_convenios:
+        data.beneficios?.some(
+          (b: string) =>
+            b.toLowerCase().includes('convênio') || b.toLowerCase().includes('convenio'),
+        ) || false,
+      interesse_seguros:
+        data.beneficios?.some((b: string) => b.toLowerCase().includes('seguro')) || false,
+      interesse_capacitacao:
+        data.beneficios?.some((b: string) => b.toLowerCase().includes('capacita')) || false,
+      interesse_representacao:
+        data.beneficios?.some((b: string) => b.toLowerCase().includes('representa')) || false,
       temas_juridicos: data.juridicoTema || [],
       prioridade_juridica: data.juridicoPrioridade || null,
       processo_andamento: data.juridicoProcesso || null,
-      status_caso: data.juridicoStatus || null,
+      status_caso: data.juridicoProcessoStatus || null,
       temas_previdenciarios: data.previdenciarioTema || [],
-      pedido_inss: data.previdenciarioInss || null,
-      resumo_necessidade: data.resumoNecessidade || null,
-      documentacao_organizada: data.documentacaoOrganizada || null,
+      pedido_inss: data.previdenciarioStatus || null,
+      resumo_necessidade: data.resumoCaso || null,
+      documentacao_organizada: data.statusDocumentacao || null,
       melhor_horario_contato: data.melhorHorario || null,
       formas_participacao: data.estiloParticipacao || [],
-      expectativa_principal: data.expectativaPrincipal,
-      comentario_adicional: data.comentarioAdicional || null,
-      lgpd_privacidade: !!data.lgpdPrivacidade,
+      expectativa_principal: data.expectativas || 'Não informada',
+      comentario_adicional: data.comentarios || null,
+      lgpd_privacidade: !!data.lgpdPolitica,
       lgpd_tratamento: !!data.lgpdTratamento,
       lgpd_marketing: !!data.lgpdMarketing,
       lgpd_veracidade: !!data.lgpdVeracidade,
@@ -42,7 +49,7 @@ export async function submitPreCadastro(data: any) {
 
     if (error) {
       console.error('Failed to save pre-cadastro:', error)
-      throw new Error('Falha ao salvar dados. Tente novamente.')
+      throw new Error(`Falha ao salvar dados: ${error.message}`)
     }
 
     // Disparar notificação (fire and forget)
