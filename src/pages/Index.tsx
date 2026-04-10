@@ -212,8 +212,8 @@ export default function Index() {
             <div className="bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/20 p-6 rounded-2xl flex flex-col hover:from-white/15 transition-colors shadow-lg">
               <Handshake className="w-8 h-8 text-emerald-400 mb-4" />
               <p className="text-sm md:text-base text-slate-200 leading-relaxed">
-                Com apoio estrutural da AMVVAR, entidade fundada em 1971 e hoje com cerca de 3.000
-                associados, esta iniciativa nasce com base institucional sólida, experiência
+                Com apoio estrutural da AMVVAR, entidade com 55 anos de fundação e hoje com cerca de
+                3.000 associados, esta iniciativa nasce com base institucional sólida, experiência
                 associativa, infraestrutura de atendimento e histórico de benefícios voltados à
                 comunidade aeronáutica. A proposta contempla suporte organizacional para a nova
                 associação, com foco em benefícios concretos, comunicação profissional, tecnologia,
