@@ -93,26 +93,26 @@ export default function Cadastro() {
   const progress = ((currentStep + 1) / STEPS.length) * 100
 
   return (
-    <div className="relative flex-1 flex flex-col items-center bg-slate-50 overflow-hidden min-h-[calc(100vh-5rem)]">
+    <div className="relative flex-1 flex flex-col items-center bg-[#0a2540] overflow-hidden min-h-[calc(100vh-5rem)]">
       {/* Watermark Background with Blue Tones */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden mix-blend-multiply">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5" />
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-primary/95 mix-blend-multiply" />
         <img
           src={logoUrl}
           alt="Watermark"
-          className="w-[150%] md:w-[80%] max-w-4xl object-contain opacity-[0.04] grayscale"
+          className="w-[150%] md:w-[80%] max-w-4xl object-contain opacity-20"
         />
       </div>
 
       <div className="container max-w-2xl py-8 px-4 relative z-10 w-full">
         <div className="mb-6 space-y-2">
-          <div className="flex justify-between items-center text-sm font-medium text-muted-foreground">
+          <div className="flex justify-between items-center text-sm font-medium text-blue-100">
             <span>
               Passo {currentStep + 1} de {STEPS.length}
             </span>
             <span className="hidden sm:inline">{STEPS[currentStep]}</span>
           </div>
-          <Progress value={progress} className="h-2 bg-slate-200" />
+          <Progress value={progress} className="h-2 bg-blue-900/50 [&>div]:bg-white" />
         </div>
 
         <Card className="border-none shadow-elevation animate-scale-in bg-white/95 backdrop-blur-sm">
