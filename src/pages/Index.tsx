@@ -45,11 +45,11 @@ export default function Index() {
         </div>
 
         <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
-          <div className="bg-white/95 p-4 md:p-6 rounded-3xl mb-8 shadow-2xl backdrop-blur-sm inline-block">
+          <div className="mb-8 inline-block">
             <img
               src={logoUrl}
               alt="Associação dos Mecânicos de Manutenção de Aeronaves do Brasil"
-              className="w-72 md:w-96 max-w-full object-contain"
+              className="w-72 md:w-96 max-w-full object-contain drop-shadow-2xl"
             />
           </div>
 
