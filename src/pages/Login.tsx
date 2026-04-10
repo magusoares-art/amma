@@ -1,57 +1,67 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/use-auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Info, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 
 export default function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('magusoares@gmail.com')
+  const [password, setPassword] = useState('Skip@Pass')
   const [isLoading, setIsLoading] = useState(false)
   const { signIn } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const from = location.state?.from?.pathname || '/admin/dashboard'
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
     const { error } = await signIn(email, password)
 
     if (error) {
-      toast.error(error.message || 'Erro ao fazer login. Verifique suas credenciais.')
+      toast.error('Erro ao fazer login. Verifique suas credenciais.')
       setIsLoading(false)
-      return
+    } else {
+      toast.success('Login realizado com sucesso!')
+      navigate(from, { replace: true })
     }
-
-    toast.success('Login realizado com sucesso')
-    navigate('/admin/dashboard')
   }
 
   return (
-    <div className="flex-1 flex items-center justify-center bg-slate-50 p-4 min-h-[calc(100vh-5rem)]">
-      <Card className="w-full max-w-md shadow-elevation border-none">
+    <div className="container max-w-md mx-auto py-16 px-4">
+      <Card>
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold tracking-tight">Acesso Administrativo</CardTitle>
-          <CardDescription>Entre com suas credenciais para acessar o painel</CardDescription>
+          <CardTitle className="text-2xl font-bold">Acesso Restrito</CardTitle>
+          <CardDescription>
+            Entre com suas credenciais para acessar o painel administrativo.
+          </CardDescription>
         </CardHeader>
-        <form onSubmit={handleLogin}>
-          <CardContent className="space-y-4">
+        <CardContent>
+          <Alert className="mb-6 bg-blue-50 border-blue-200">
+            <Info className="h-4 w-4 text-blue-600" />
+            <AlertDescription className="text-blue-800 text-sm">
+              <strong>URL do Dashboard:</strong> /admin/dashboard
+              <br />
+              <strong>Login:</strong> magusoares@gmail.com
+              <br />
+              <strong>Senha:</strong> Skip@Pass
+            </AlertDescription>
+          </Alert>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">E-mail</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@exemplo.com"
+                placeholder="nome@exemplo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -67,13 +77,12 @@ export default function Login() {
                 required
               />
             </div>
-          </CardContent>
-          <CardFooter>
-            <Button className="w-full" type="submit" disabled={isLoading}>
-              {isLoading ? 'Entrando...' : 'Entrar'}
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Entrar
             </Button>
-          </CardFooter>
-        </form>
+          </form>
+        </CardContent>
       </Card>
     </div>
   )
