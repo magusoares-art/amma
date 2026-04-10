@@ -122,28 +122,28 @@ function TransparentLogo({
 
 const CARDS = [
   {
-    icon: <Scale className="w-8 h-8 text-primary" />,
-    title: 'Suporte Jurídico',
-    description:
-      'Assessoria especializada em causas trabalhistas, cíveis e defesa em processos regulatórios.',
-  },
-  {
     icon: <HeartPulse className="w-8 h-8 text-primary" />,
     title: 'Benefícios Exclusivos',
     description:
-      'Acesso a convênios de saúde, odontológicos, seguros de vida, perda de habilitação e clubes esportivos.',
-  },
-  {
-    icon: <ShieldCheck className="w-8 h-8 text-primary" />,
-    title: 'Representação',
-    description:
-      'Voz ativa junto a órgãos reguladores e defesa dos interesses políticos da categoria.',
+      'Intermediação para inclusão dos associados da nova entidade em planos de assistência médica, odontológica, funeral e farmacêutica. Descontos de até 60% em redes de farmácias. Parcerias com estabelecimentos de ensino e clubes esportivos com condições especiais.',
   },
   {
     icon: <GraduationCap className="w-8 h-8 text-primary" />,
     title: 'Capacitação',
     description:
-      'Parcerias para cursos de atualização, treinamentos técnicos, simulador de aeronaves e certificações.',
+      'Acesso a programas de bolsas de estudo e cursos técnicos, como o curso de Técnico em Manutenção de Aeronaves já apoiado pela AMVVAR amvvar.org.br. Intercâmbio com instituições de ensino aeronáutico e promoção de eventos técnicos, palestras e workshops. Compartilhamento de conteúdo sobre atualização normativa da ANAC e boas práticas de manutenção. Acesso a Simulador de Vôo com valores abaixo dos praticados no mercado.',
+  },
+  {
+    icon: <ShieldCheck className="w-8 h-8 text-primary" />,
+    title: 'Suporte Previdenciário',
+    description:
+      'Suporte integral da assistente social da associação para requerimento de auxílios (doença, acidente), aposentadorias (comum, especial, por invalidez) e regularização junto ao INSS.',
+  },
+  {
+    icon: <Scale className="w-8 h-8 text-primary" />,
+    title: 'Suporte Jurídico',
+    description:
+      'Suporte jurídico especializado através de parceria com escritório de advocacia renomado, para questões trabalhistas, previdenciárias e contratuais. Orientação técnica para elaboração do Estatuto Social e trâmites de registro em cartório e obtenção de CNPJ. Modelos de documentos, atas e regulamentos internos adaptados à realidade da aviação civil.',
   },
 ]
 
@@ -195,12 +195,7 @@ export default function Index() {
             <span className="text-accent">Mecânicos de Aeronaves</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-3xl leading-relaxed">
-            Estamos fundando uma nova associação dedicada exclusivamente aos interesses, defesa e
-            desenvolvimento dos profissionais de manutenção de aeronaves.
-          </p>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12 w-full max-w-7xl text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl text-left mt-8">
             {/* Bloco 1 */}
             <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl flex flex-col hover:bg-white/10 transition-colors shadow-lg">
               <Plane className="w-8 h-8 text-blue-400 mb-4" />
@@ -208,8 +203,9 @@ export default function Index() {
                 Os Mecânicos de Manutenção de Aeronaves sustentam, todos os dias, a segurança, a
                 disponibilidade e a confiabilidade da aviação civil brasileira. Agora, chegou o
                 momento de fortalecer essa categoria com uma associação própria, construída desde a
-                origem com participação direta dos profissionais que conhecem a operação, os
-                desafios regulatórios e a necessidade de representação qualificada.
+                origem com participação direta dos profissionais que conhecem a operação. Promover
+                atualização técnica, troca de experiências e fortalecimento da identidade
+                profissional, com atuação baseada em excelência.
               </p>
             </div>
 
@@ -231,9 +227,9 @@ export default function Index() {
               <UserPlus className="w-8 h-8 text-[#DAA520] mb-4" />
               <p className="text-sm md:text-base text-slate-200 leading-relaxed">
                 Ao se cadastrar como Associado Fundador, você demonstra interesse em participar da
-                construção de uma representação exclusiva para os Mecânicos de Manutenção de
-                Aeronaves, ajudando a priorizar benefícios, pautas institucionais e frentes de
-                suporte jurídico e previdenciário desde o início.
+                construção de uma Associação exclusiva para os Mecânicos de Manutenção de Aeronaves,
+                tendo acesso a diversos benefícios, frentes de suporte jurídico e previdenciário
+                desde o início.
                 <br />
                 <br />O preenchimento leva menos de 3 minutos. Cadastre-se agora para receber os
                 próximos passos, acompanhar a formação da associação e registrar seu interesse como
@@ -241,20 +237,6 @@ export default function Index() {
               </p>
             </div>
           </div>
-
-          <Button
-            asChild
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-white text-lg h-14 px-8 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-          >
-            <Link to="/cadastro">
-              Quero participar desde o início
-              <ChevronRight className="ml-2 w-5 h-5" />
-            </Link>
-          </Button>
-          <p className="mt-4 text-sm text-slate-300 font-medium">
-            Torne-se um membro fundador hoje mesmo.
-          </p>
         </div>
       </section>
 
@@ -290,6 +272,25 @@ export default function Index() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-slate-50 border-t">
+        <div className="container px-4 md:px-6 flex flex-col items-center text-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-accent hover:bg-accent/90 text-white text-lg h-14 px-8 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+          >
+            <Link to="/cadastro">
+              Quero participar desde o início
+              <ChevronRight className="ml-2 w-5 h-5" />
+            </Link>
+          </Button>
+          <p className="mt-4 text-sm text-slate-500 font-medium">
+            Torne-se um membro fundador hoje mesmo.
+          </p>
         </div>
       </section>
     </div>
