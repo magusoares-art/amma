@@ -4,16 +4,18 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ShieldCheck, HeartPulse, Scale, GraduationCap, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import logoUrl from '@/assets/logo-com-fundo-transp2-c7f95.jpg'
+import logoUrl from '@/assets/logo-com-fundo-transp2-4518a.jpg'
 
 function TransparentLogo({
   src,
   alt,
   className,
+  cropRatio = 1,
 }: {
   src: string
   alt: string
   className?: string
+  cropRatio?: number
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [loaded, setLoaded] = useState(false)
@@ -27,9 +29,12 @@ function TransparentLogo({
       const ctx = canvas.getContext('2d', { willReadFrequently: true })
       if (!ctx) return
 
+      const targetHeight = Math.floor(img.height * cropRatio)
       canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0)
+      canvas.height = targetHeight
+
+      // Draw and crop simultaneously
+      ctx.drawImage(img, 0, 0, img.width, targetHeight, 0, 0, img.width, targetHeight)
 
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
       const data = imageData.data
@@ -91,7 +96,7 @@ function TransparentLogo({
       setLoaded(true)
     }
     img.src = src
-  }, [src])
+  }, [src, cropRatio])
 
   return (
     <canvas
@@ -147,12 +152,22 @@ export default function Index() {
         </div>
 
         <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
-          <div className="mb-8 inline-block">
+          <div className="mb-12 flex flex-col items-center w-full max-w-3xl mx-auto">
             <TransparentLogo
               src={logoUrl}
-              alt="Associação dos Mecânicos de Manutenção de Aeronaves do Brasil"
-              className="w-72 md:w-96 max-w-full object-contain drop-shadow-2xl"
+              alt="Símbolo AMMA"
+              cropRatio={0.72}
+              className="w-48 md:w-64 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-6"
             />
+
+            <div className="bg-white/95 backdrop-blur-md px-6 py-5 md:px-10 md:py-6 rounded-3xl shadow-2xl border border-white/20 w-full transform transition-all hover:scale-[1.02]">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-black tracking-tight uppercase text-center leading-none mb-2">
+                AMMA - Associação dos Mecânicos
+              </h2>
+              <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#DAA520] tracking-widest uppercase text-center leading-none">
+                De Manutenção de Aeronaves
+              </h3>
+            </div>
           </div>
 
           <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm">
