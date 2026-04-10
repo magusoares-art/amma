@@ -293,6 +293,23 @@ export default function Index() {
           </p>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="py-10 bg-[#0a2540] border-t border-slate-800/50">
+        <div className="container px-4 md:px-6 flex flex-col items-center text-center">
+          <div className="text-xs text-slate-300/80 space-y-1.5">
+            <p className="font-semibold text-slate-200 mb-2 uppercase tracking-wide">
+              Faça nos uma visita:
+            </p>
+            <p>Estrada do Galeão, nº 2500 - Bloco A - Sala 312</p>
+            <p>Ilha do Governador - Rio de Janeiro - RJ</p>
+            <p>CEP: 21931-582</p>
+            <p className="pt-2">
+              (21) 3393-4012 &nbsp;/&nbsp; (21) 2462-3561 &nbsp;/&nbsp; (21) 97008-0735 – WhatsApp
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
