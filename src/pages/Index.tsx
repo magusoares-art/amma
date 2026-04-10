@@ -215,7 +215,7 @@ export default function Index() {
                 Com apoio estrutural da AMVVAR, entidade com 55 anos de fundação e hoje com cerca de
                 3.000 associados, esta iniciativa nasce com base institucional sólida, experiência
                 associativa, infraestrutura de atendimento e histórico de benefícios voltados à
-                comunidade aeronáutica. A proposta contempla suporte organizacional para a nova
+                comunidade da aviação. A proposta contempla suporte organizacional para a nova
                 associação, com foco em benefícios concretos, comunicação profissional, tecnologia,
                 convênios, seguros, capacitação e apoio técnico nas pautas de interesse coletivo.
               </p>
