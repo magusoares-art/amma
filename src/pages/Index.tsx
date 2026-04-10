@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ShieldCheck, HeartPulse, Scale, GraduationCap, ChevronRight } from 'lucide-react'
-import logoUrl from '@/assets/logo-mecanicos-manutencao-6b5ea.jpeg'
+import logoUrl from '@/assets/logo-com-fundo-transp2-c7f95.jpg'
 
 const CARDS = [
   {
@@ -45,11 +45,13 @@ export default function Index() {
         </div>
 
         <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
-          <img
-            src={logoUrl}
-            alt="Associação dos Mecânicos de Manutenção de Aeronaves do Brasil"
-            className="w-64 md:w-80 object-contain mb-8 mix-blend-screen drop-shadow-lg"
-          />
+          <div className="bg-white/95 p-4 md:p-6 rounded-3xl mb-8 shadow-2xl backdrop-blur-sm inline-block">
+            <img
+              src={logoUrl}
+              alt="Associação dos Mecânicos de Manutenção de Aeronaves do Brasil"
+              className="w-72 md:w-96 max-w-full object-contain"
+            />
+          </div>
 
           <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm">
             <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
