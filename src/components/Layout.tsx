@@ -18,10 +18,10 @@ export default function Layout() {
               />
               <div className="ml-3 border-l-2 border-slate-200 pl-3 hidden sm:block">
                 <span className="block text-xs font-semibold text-primary uppercase tracking-wider leading-tight">
-                  Associação
+                  AMMA
                 </span>
                 <span className="block text-xs text-muted-foreground leading-tight">
-                  Mecânicos Aeronáuticos
+                  dos Mecânicos de Manutenção de Aeronaves
                 </span>
               </div>
             </div>
@@ -57,7 +57,7 @@ export default function Layout() {
         <div className="container px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <div className="flex flex-col">
             <span className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Associação dos Mecânicos Aeronáuticos.
+              © {new Date().getFullYear()} Associação dos Mecânicos de Manutenção de Aeronaves.
             </span>
             <span className="text-xs text-slate-400 mt-1 max-w-md">
               Os dados coletados neste pré-cadastro estão protegidos de acordo com a Lei Geral de
