@@ -131,7 +131,7 @@ const CARDS = [
     icon: <GraduationCap className="w-8 h-8 text-primary" />,
     title: 'Capacitação',
     description:
-      'Acesso a programas de bolsas de estudo e cursos técnicos, como o curso de Técnico em Manutenção de Aeronaves já apoiado pela AMVVAR amvvar.org.br. Intercâmbio com instituições de ensino aeronáutico e promoção de eventos técnicos, palestras e workshops. Compartilhamento de conteúdo sobre atualização normativa da ANAC e boas práticas de manutenção. Acesso a Simulador de Vôo com valores abaixo dos praticados no mercado.',
+      'Acesso a programas de bolsas de estudo e cursos técnicos, como o curso de Técnico em Manutenção de Aeronaves. Promoção de eventos técnicos, palestras e workshops. Compartilhamento de conteúdo sobre atualização normativa da ANAC e boas práticas de manutenção. Acesso a Simulador de Voo com valores abaixo dos praticados no mercado.',
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-primary" />,
