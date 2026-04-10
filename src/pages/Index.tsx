@@ -229,9 +229,9 @@ export default function Index() {
                 Aeronaves, ajudando a priorizar benefícios, pautas institucionais e frentes de
                 suporte jurídico e previdenciário desde o início.
                 <br />
-                <br />O preenchimento leva menos de 3 minutos no celular. Cadastre-se agora para
-                receber os próximos passos, acompanhar a formação da associação e registrar seu
-                interesse como fundador.
+                <br />O preenchimento leva menos de 3 minutos. Cadastre-se agora para receber os
+                próximos passos, acompanhar a formação da associação e registrar seu interesse como
+                fundador.
               </p>
             </div>
           </div>
