@@ -131,7 +131,7 @@ const CARDS = [
     icon: <HeartPulse className="w-8 h-8 text-primary" />,
     title: 'Benefícios Exclusivos',
     description:
-      'Acesso a convênios de saúde, odontológicos, seguros de vida e perda de habilitação.',
+      'Acesso a convênios de saúde, odontológicos, seguros de vida, perda de habilitação e clubes esportivos.',
   },
   {
     icon: <ShieldCheck className="w-8 h-8 text-primary" />,
@@ -142,7 +142,8 @@ const CARDS = [
   {
     icon: <GraduationCap className="w-8 h-8 text-primary" />,
     title: 'Capacitação',
-    description: 'Parcerias para cursos de atualização, treinamentos técnicos e certificações.',
+    description:
+      'Parcerias para cursos de atualização, treinamentos técnicos, simulador de aeronaves e certificações.',
   },
 ]
 

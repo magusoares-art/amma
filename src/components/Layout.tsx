@@ -1,5 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { ExternalLink } from 'lucide-react'
+import logoUrl from '@/assets/logo-com-fundo-transp2-4518a.jpg'
 
 export default function Layout() {
   const location = useLocation()
@@ -12,9 +13,9 @@ export default function Layout() {
           <Link to="/" className="flex items-center gap-3 group">
             <div className="flex items-center">
               <img
-                src="https://img.usecurling.com/i?q=wings&shape=lineal-color&color=blue"
+                src={logoUrl}
                 alt="Logo Associação"
-                className="h-8 w-8 md:h-10 md:w-10 group-hover:scale-105 transition-transform"
+                className="h-8 w-8 md:h-10 md:w-10 group-hover:scale-105 transition-transform object-contain mix-blend-multiply"
               />
               <div className="ml-3 border-l-2 border-slate-200 pl-3 hidden sm:block">
                 <span className="block text-xs font-semibold text-primary uppercase tracking-wider leading-tight">
