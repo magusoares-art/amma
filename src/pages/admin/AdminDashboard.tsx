@@ -11,8 +11,15 @@ import {
 } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Search, Download, RefreshCw } from 'lucide-react'
+import { Search, Download, RefreshCw, Filter } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { toast } from 'sonner'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
@@ -32,6 +39,7 @@ export default function AdminDashboard() {
   const [cadastros, setCadastros] = useState<PreCadastro[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [statusFilter, setStatusFilter] = useState<string>('all')
 
   const fetchCadastros = async () => {
     setLoading(true)
@@ -52,12 +60,20 @@ export default function AdminDashboard() {
     fetchCadastros()
   }, [])
 
-  const filteredCadastros = cadastros.filter(
-    (c) =>
+  const filteredCadastros = cadastros.filter((c) => {
+    const matchesSearch =
       c.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
       c.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       c.cidade.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.uf.toLowerCase().includes(searchTerm.toLowerCase()),
+      c.uf.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const matchesStatus = statusFilter === 'all' || c.situacao_profissional === statusFilter
+
+    return matchesSearch && matchesStatus
+  })
+
+  const statuses = Array.from(new Set(cadastros.map((c) => c.situacao_profissional))).filter(
+    Boolean,
   )
 
   const handleExportCSV = () => {
@@ -129,15 +145,33 @@ export default function AdminDashboard() {
       </div>
 
       <Card className="shadow-sm border-none bg-white">
-        <CardHeader>
-          <div className="relative w-full max-w-sm">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-            <Input
-              placeholder="Buscar por nome, email ou cidade..."
-              className="pl-9 bg-slate-50 border-slate-200"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        <CardHeader className="space-y-4">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="relative w-full max-w-sm">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <Input
+                placeholder="Buscar por nome, email ou cidade..."
+                className="pl-9 bg-slate-50 border-slate-200"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-full sm:w-[240px] bg-slate-50 border-slate-200">
+                <div className="flex items-center gap-2 text-slate-600">
+                  <Filter className="w-4 h-4" />
+                  <SelectValue placeholder="Filtrar por Situação" />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todas as situações</SelectItem>
+                {statuses.map((status) => (
+                  <SelectItem key={status} value={status}>
+                    {status}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </CardHeader>
         <CardContent>

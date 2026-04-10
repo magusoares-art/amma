@@ -11,6 +11,7 @@ import Layout from './components/Layout'
 import Login from './pages/Login'
 import AdminLayout from './components/admin/AdminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
+import { AdminAccessButton } from './components/AdminAccessButton'
 
 const App = () => (
   <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
@@ -32,6 +33,7 @@ const App = () => (
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <AdminAccessButton />
       </TooltipProvider>
     </AuthProvider>
   </BrowserRouter>
