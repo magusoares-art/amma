@@ -174,10 +174,10 @@ export default function Index() {
               <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 AMMA
               </h2>
-              <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight">
+              <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight flex flex-col gap-1">
                 <span className="font-bold text-[#DAA520] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
                   Associação dos Mecânicos
-                </span>{' '}
+                </span>
                 <span className="font-normal text-black drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
                   de Manutenção de Aeronaves
                 </span>
