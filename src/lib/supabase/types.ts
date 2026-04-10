@@ -9,6 +9,126 @@ export type Database = {
   }
   public: {
     Tables: {
+      pre_cadastros: {
+        Row: {
+          area_atuacao: string
+          beneficios_interesse: string[]
+          canal_contato: string
+          cidade: string
+          comentario_adicional: string | null
+          cpf: string
+          created_at: string
+          documentacao_organizada: string | null
+          email: string
+          empresa: string | null
+          expectativa_principal: string
+          formas_participacao: string[]
+          id: string
+          interesse_capacitacao: boolean
+          interesse_convenios: boolean
+          interesse_representacao: boolean
+          interesse_seguros: boolean
+          lgpd_marketing: boolean
+          lgpd_privacidade: boolean
+          lgpd_tratamento: boolean
+          lgpd_veracidade: boolean
+          licenca: string | null
+          melhor_horario_contato: string | null
+          nome: string
+          pedido_inss: string | null
+          prioridade_juridica: string | null
+          processo_andamento: string | null
+          regioes: string[]
+          resumo_necessidade: string | null
+          segmento: string
+          situacao_profissional: string
+          status_caso: string | null
+          temas_juridicos: string[]
+          temas_previdenciarios: string[]
+          tempo_atuacao: string
+          uf: string
+          whatsapp: string
+        }
+        Insert: {
+          area_atuacao: string
+          beneficios_interesse?: string[]
+          canal_contato: string
+          cidade: string
+          comentario_adicional?: string | null
+          cpf: string
+          created_at?: string
+          documentacao_organizada?: string | null
+          email: string
+          empresa?: string | null
+          expectativa_principal: string
+          formas_participacao?: string[]
+          id?: string
+          interesse_capacitacao?: boolean
+          interesse_convenios?: boolean
+          interesse_representacao?: boolean
+          interesse_seguros?: boolean
+          lgpd_marketing?: boolean
+          lgpd_privacidade?: boolean
+          lgpd_tratamento?: boolean
+          lgpd_veracidade?: boolean
+          licenca?: string | null
+          melhor_horario_contato?: string | null
+          nome: string
+          pedido_inss?: string | null
+          prioridade_juridica?: string | null
+          processo_andamento?: string | null
+          regioes?: string[]
+          resumo_necessidade?: string | null
+          segmento: string
+          situacao_profissional: string
+          status_caso?: string | null
+          temas_juridicos?: string[]
+          temas_previdenciarios?: string[]
+          tempo_atuacao: string
+          uf: string
+          whatsapp: string
+        }
+        Update: {
+          area_atuacao?: string
+          beneficios_interesse?: string[]
+          canal_contato?: string
+          cidade?: string
+          comentario_adicional?: string | null
+          cpf?: string
+          created_at?: string
+          documentacao_organizada?: string | null
+          email?: string
+          empresa?: string | null
+          expectativa_principal?: string
+          formas_participacao?: string[]
+          id?: string
+          interesse_capacitacao?: boolean
+          interesse_convenios?: boolean
+          interesse_representacao?: boolean
+          interesse_seguros?: boolean
+          lgpd_marketing?: boolean
+          lgpd_privacidade?: boolean
+          lgpd_tratamento?: boolean
+          lgpd_veracidade?: boolean
+          licenca?: string | null
+          melhor_horario_contato?: string | null
+          nome?: string
+          pedido_inss?: string | null
+          prioridade_juridica?: string | null
+          processo_andamento?: string | null
+          regioes?: string[]
+          resumo_necessidade?: string | null
+          segmento?: string
+          situacao_profissional?: string
+          status_caso?: string | null
+          temas_juridicos?: string[]
+          temas_previdenciarios?: string[]
+          tempo_atuacao?: string
+          uf?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -225,6 +345,44 @@ export const Constants = {
 // --- COLUMN TYPES (actual PostgreSQL types) ---
 // Use this to know the real database type when writing migrations.
 // "string" in TypeScript types above may be uuid, text, varchar, timestamptz, etc.
+// Table: pre_cadastros
+//   id: uuid (not null, default: gen_random_uuid())
+//   nome: text (not null)
+//   cpf: text (not null)
+//   whatsapp: text (not null)
+//   email: text (not null)
+//   cidade: text (not null)
+//   uf: text (not null)
+//   canal_contato: text (not null)
+//   situacao_profissional: text (not null)
+//   area_atuacao: text (not null)
+//   licenca: text (nullable)
+//   empresa: text (nullable)
+//   tempo_atuacao: text (not null)
+//   segmento: text (not null)
+//   regioes: _text (not null, default: '{}'::text[])
+//   beneficios_interesse: _text (not null, default: '{}'::text[])
+//   interesse_convenios: boolean (not null, default: false)
+//   interesse_seguros: boolean (not null, default: false)
+//   interesse_capacitacao: boolean (not null, default: false)
+//   interesse_representacao: boolean (not null, default: false)
+//   temas_juridicos: _text (not null, default: '{}'::text[])
+//   prioridade_juridica: text (nullable)
+//   processo_andamento: text (nullable)
+//   status_caso: text (nullable)
+//   temas_previdenciarios: _text (not null, default: '{}'::text[])
+//   pedido_inss: text (nullable)
+//   resumo_necessidade: text (nullable)
+//   documentacao_organizada: text (nullable)
+//   melhor_horario_contato: text (nullable)
+//   formas_participacao: _text (not null, default: '{}'::text[])
+//   expectativa_principal: text (not null)
+//   comentario_adicional: text (nullable)
+//   lgpd_privacidade: boolean (not null, default: false)
+//   lgpd_tratamento: boolean (not null, default: false)
+//   lgpd_marketing: boolean (not null, default: false)
+//   lgpd_veracidade: boolean (not null, default: false)
+//   created_at: timestamp with time zone (not null, default: now())
 // Table: profiles
 //   id: uuid (not null)
 //   email: text (not null)
@@ -246,6 +404,8 @@ export const Constants = {
 //   user_id: uuid (nullable)
 
 // --- CONSTRAINTS ---
+// Table: pre_cadastros
+//   PRIMARY KEY pre_cadastros_pkey: PRIMARY KEY (id)
 // Table: profiles
 //   FOREIGN KEY profiles_id_fkey: FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE
 //   PRIMARY KEY profiles_pkey: PRIMARY KEY (id)
@@ -254,6 +414,11 @@ export const Constants = {
 //   FOREIGN KEY transactions_user_id_fkey: FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL
 
 // --- ROW LEVEL SECURITY POLICIES ---
+// Table: pre_cadastros
+//   Policy "allow_anon_insert_pre_cadastros" (INSERT, PERMISSIVE) roles={anon,authenticated}
+//     WITH CHECK: true
+//   Policy "allow_authenticated_select_pre_cadastros" (SELECT, PERMISSIVE) roles={authenticated}
+//     USING: true
 // Table: profiles
 //   Policy "authenticated_delete" (DELETE, PERMISSIVE) roles={authenticated}
 //     USING: true
