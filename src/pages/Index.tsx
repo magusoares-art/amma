@@ -2,7 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { ShieldCheck, HeartPulse, Scale, GraduationCap, ChevronRight } from 'lucide-react'
+import {
+  ShieldCheck,
+  HeartPulse,
+  Scale,
+  GraduationCap,
+  ChevronRight,
+  Plane,
+  Handshake,
+  UserPlus,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import logoUrl from '@/assets/logo-com-fundo-transp2-4518a.jpg'
 
@@ -162,10 +171,10 @@ export default function Index() {
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-black tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                AMMA - Associação dos Mecânicos
+                AMMA
               </h2>
               <h3 className="text-sm md:text-base lg:text-lg font-extrabold text-[#DAA520] tracking-widest uppercase text-center leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
-                De Manutenção de Aeronaves
+                Associação dos Mecânicos de Manutenção de Aeronaves
               </h3>
             </div>
           </div>
@@ -180,10 +189,52 @@ export default function Index() {
             <span className="text-accent">Mecânicos de Aeronaves</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-3xl leading-relaxed">
             Estamos fundando uma nova associação dedicada exclusivamente aos interesses, defesa e
             desenvolvimento dos profissionais de manutenção de aeronaves.
           </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12 w-full max-w-7xl text-left">
+            {/* Bloco 1 */}
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl flex flex-col hover:bg-white/10 transition-colors shadow-lg">
+              <Plane className="w-8 h-8 text-blue-400 mb-4" />
+              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
+                Os Mecânicos de Manutenção de Aeronaves sustentam, todos os dias, a segurança, a
+                disponibilidade e a confiabilidade da aviação civil brasileira. Agora, chegou o
+                momento de fortalecer essa categoria com uma associação própria, construída desde a
+                origem com participação direta dos profissionais que conhecem a operação, os
+                desafios regulatórios e a necessidade de representação qualificada.
+              </p>
+            </div>
+
+            {/* Bloco 2 */}
+            <div className="bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/20 p-6 rounded-2xl flex flex-col hover:from-white/15 transition-colors shadow-lg">
+              <Handshake className="w-8 h-8 text-emerald-400 mb-4" />
+              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
+                Com apoio estrutural da AMVVAR, entidade fundada em 1971 e hoje com cerca de 3.000
+                associados, esta iniciativa nasce com base institucional sólida, experiência
+                associativa, infraestrutura de atendimento e histórico de benefícios voltados à
+                comunidade aeronáutica. A proposta contempla suporte organizacional para a nova
+                associação, com foco em benefícios concretos, comunicação profissional, tecnologia,
+                convênios, seguros, capacitação e apoio técnico nas pautas de interesse coletivo.
+              </p>
+            </div>
+
+            {/* Bloco 3 */}
+            <div className="bg-accent/20 backdrop-blur-md border border-accent/30 p-6 rounded-2xl flex flex-col hover:bg-accent/30 transition-colors shadow-lg">
+              <UserPlus className="w-8 h-8 text-[#DAA520] mb-4" />
+              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
+                Ao se cadastrar como Associado Fundador, você demonstra interesse em participar da
+                construção de uma representação exclusiva para os Mecânicos de Manutenção de
+                Aeronaves, ajudando a priorizar benefícios, pautas institucionais e frentes de
+                suporte jurídico e previdenciário desde o início.
+                <br />
+                <br />O preenchimento leva menos de 3 minutos no celular. Cadastre-se agora para
+                receber os próximos passos, acompanhar a formação da associação e registrar seu
+                interesse como fundador.
+              </p>
+            </div>
+          </div>
 
           <Button
             asChild
