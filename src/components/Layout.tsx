@@ -21,9 +21,9 @@ export default function Layout() {
                   AMMA
                 </span>
                 <span className="block text-xs text-muted-foreground leading-tight">
-                  dos Mecânicos de Manutenção de Aeronaves
+                  Associação dos Mecânicos de Manutenção de Aeronaves
                 </span>
-              </div>
+              </div>{' '}
             </div>
           </Link>
 

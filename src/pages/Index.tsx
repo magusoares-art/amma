@@ -182,7 +182,7 @@ export default function Index() {
 
           <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl leading-relaxed">
             Estamos fundando uma nova associação dedicada exclusivamente aos interesses, defesa e
-            desenvolvimento dos profissionais de manutenção aeronáutica no Brasil.
+            desenvolvimento dos profissionais de manutenção de aeronaves.
           </p>
 
           <Button
