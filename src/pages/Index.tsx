@@ -141,7 +141,7 @@ export default function Index() {
   return (
     <div className="flex flex-col flex-1 animate-fade-in">
       {/* Hero Section */}
-      <section className="relative bg-primary text-white py-20 lg:py-32 overflow-hidden">
+      <section className="relative bg-primary text-white pt-10 pb-20 lg:pt-16 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://img.usecurling.com/p/1600/800?q=aircraft%20maintenance&color=black"
