@@ -45,6 +45,7 @@ export async function submitPreCadastro(data: any) {
       lgpd_tratamento: !!data.lgpdTratamento,
       lgpd_marketing: !!data.lgpdMarketing,
       lgpd_veracidade: !!data.lgpdVeracidade,
+      indicou_amigo: !!data.indicou_amigo,
     })
 
     if (error) {

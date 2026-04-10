@@ -42,6 +42,7 @@ export type Database = {
           resumo_necessidade: string | null
           segmento: string
           situacao_profissional: string
+          status_aprovacao: string
           status_caso: string | null
           temas_juridicos: string[]
           temas_previdenciarios: string[]
@@ -81,6 +82,7 @@ export type Database = {
           resumo_necessidade?: string | null
           segmento: string
           situacao_profissional: string
+          status_aprovacao?: string
           status_caso?: string | null
           temas_juridicos?: string[]
           temas_previdenciarios?: string[]
@@ -120,6 +122,7 @@ export type Database = {
           resumo_necessidade?: string | null
           segmento?: string
           situacao_profissional?: string
+          status_aprovacao?: string
           status_caso?: string | null
           temas_juridicos?: string[]
           temas_previdenciarios?: string[]
@@ -383,6 +386,7 @@ export const Constants = {
 //   lgpd_marketing: boolean (not null, default: false)
 //   lgpd_veracidade: boolean (not null, default: false)
 //   created_at: timestamp with time zone (not null, default: now())
+//   status_aprovacao: text (not null, default: 'Pendente'::text)
 // Table: profiles
 //   id: uuid (not null)
 //   email: text (not null)
@@ -419,6 +423,9 @@ export const Constants = {
 //     WITH CHECK: true
 //   Policy "allow_authenticated_select_pre_cadastros" (SELECT, PERMISSIVE) roles={authenticated}
 //     USING: true
+//   Policy "allow_authenticated_update_pre_cadastros" (UPDATE, PERMISSIVE) roles={authenticated}
+//     USING: true
+//     WITH CHECK: true
 // Table: profiles
 //   Policy "authenticated_delete" (DELETE, PERMISSIVE) roles={authenticated}
 //     USING: true
