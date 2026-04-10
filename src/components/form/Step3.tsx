@@ -4,8 +4,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
 
 const BENEFICIOS_OPTIONS = [
-  { value: 'convenios', label: 'Convênios (Saúde, Odonto, Farmácia)' },
-  { value: 'seguros', label: 'Seguros (Vida, Perda de Habilitação)' },
+  { value: 'convenios', label: 'Convênios (Saúde, Odonto, Funeral, Farmácia, Clube Esportivo)' },
+  { value: 'seguros', label: 'Seguros (Vida, Auto, Moto, Perda de Habilitação)' },
   { value: 'capacitacao', label: 'Capacitação e Treinamentos' },
   { value: 'representacao', label: 'Representação Sindical / Política' },
   { value: 'Suporte jurídico', label: 'Suporte Jurídico' },

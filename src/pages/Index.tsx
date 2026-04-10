@@ -171,11 +171,16 @@ export default function Index() {
             />
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-black tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 AMMA
               </h2>
-              <h3 className="text-sm md:text-base lg:text-lg font-extrabold text-[#DAA520] tracking-widest uppercase text-center leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
-                Associação dos Mecânicos de Manutenção de Aeronaves
+              <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight">
+                <span className="font-bold text-[#DAA520] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+                  Associação dos Mecânicos
+                </span>{' '}
+                <span className="font-normal text-black drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
+                  de Manutenção de Aeronaves
+                </span>
               </h3>
             </div>
           </div>
