@@ -59,14 +59,14 @@ export default function Index() {
             <img
               src={logoUrl}
               alt="Símbolo AMMA"
-              className="w-28 md:w-36 lg:w-40 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-2"
+              className="w-28 md:w-36 lg:w-40 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-1"
             />
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              {/* <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 AMMA
-              </h2>
-              <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight">
+              </h2> */}
+              <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight mt-1">
                 <span className="font-bold text-[#DAA520] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] block mb-1">
                   Associação dos Mecânicos
                 </span>
