@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -12,113 +11,7 @@ import {
   Handshake,
   UserPlus,
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import logoUrl from '@/assets/logo-com-fundo-transp3-copia-59d64.jpg'
-
-function TransparentLogo({
-  src,
-  alt,
-  className,
-  cropRatio = 1,
-}: {
-  src: string
-  alt: string
-  className?: string
-  cropRatio?: number
-}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    const img = new Image()
-    img.crossOrigin = 'anonymous'
-    img.onload = () => {
-      const canvas = canvasRef.current
-      if (!canvas) return
-      const ctx = canvas.getContext('2d', { willReadFrequently: true })
-      if (!ctx) return
-
-      const targetHeight = Math.floor(img.height * cropRatio)
-      canvas.width = img.width
-      canvas.height = targetHeight
-
-      // Draw and crop simultaneously
-      ctx.drawImage(img, 0, 0, img.width, targetHeight, 0, 0, img.width, targetHeight)
-
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      const data = imageData.data
-      const width = canvas.width
-      const height = canvas.height
-
-      const visited = new Uint8Array(width * height)
-      const stack: number[] = []
-
-      // Add borders to the stack to initiate flood fill
-      for (let x = 0; x < width; x++) {
-        stack.push(x, 0)
-        stack.push(x, height - 1)
-      }
-      for (let y = 0; y < height; y++) {
-        stack.push(0, y)
-        stack.push(width - 1, y)
-      }
-
-      // Identify the fake checkerboard background pattern (white and light gray pixels)
-      const isBg = (r: number, g: number, b: number) => {
-        if (r > 240 && g > 240 && b > 240) return true
-        const isGray = Math.abs(r - g) < 25 && Math.abs(g - b) < 25 && Math.abs(r - b) < 25
-        if (isGray && r > 130) return true
-        return false
-      }
-
-      let iterations = 0
-      while (stack.length > 0) {
-        if (iterations++ > width * height * 4) break
-
-        const y = stack.pop()!
-        const x = stack.pop()!
-
-        if (x < 0 || x >= width || y < 0 || y >= height) continue
-
-        const pixelIdx = y * width + x
-        if (visited[pixelIdx]) continue
-        visited[pixelIdx] = 1
-
-        const idx = pixelIdx * 4
-        if (data[idx + 3] === 0) continue
-
-        const r = data[idx]
-        const g = data[idx + 1]
-        const b = data[idx + 2]
-
-        if (isBg(r, g, b)) {
-          data[idx + 3] = 0 // Remove background pixel
-
-          stack.push(x + 1, y)
-          stack.push(x - 1, y)
-          stack.push(x, y + 1)
-          stack.push(x, y - 1)
-        }
-      }
-
-      ctx.putImageData(imageData, 0, 0)
-      setLoaded(true)
-    }
-    img.src = src
-  }, [src, cropRatio])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className={cn(
-        className,
-        'transition-opacity duration-700',
-        loaded ? 'opacity-100' : 'opacity-0',
-      )}
-      aria-label={alt}
-    />
-  )
-}
 
 const CARDS = [
   {
@@ -163,10 +56,9 @@ export default function Index() {
 
         <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
           <div className="mb-12 flex flex-col items-center w-full max-w-3xl mx-auto">
-            <TransparentLogo
+            <img
               src={logoUrl}
               alt="Símbolo AMMA"
-              cropRatio={1}
               className="w-20 md:w-28 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] mb-6"
             />
 

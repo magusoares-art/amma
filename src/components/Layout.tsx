@@ -15,7 +15,7 @@ export default function Layout() {
               <img
                 src={logoUrl}
                 alt="Logo Associação"
-                className="h-8 w-8 md:h-10 md:w-10 group-hover:scale-105 transition-transform object-contain mix-blend-multiply"
+                className="h-8 w-8 md:h-10 md:w-10 group-hover:scale-105 transition-transform object-contain"
               />
               <div className="ml-3 border-l-2 border-slate-200 pl-3 hidden sm:block">
                 <span className="block text-xs font-semibold text-primary uppercase tracking-wider leading-tight">
