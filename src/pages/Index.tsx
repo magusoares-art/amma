@@ -62,7 +62,7 @@ export default function Index() {
               className="w-40 md:w-52 lg:w-64 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
             />
 
-            <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center -mt-3 md:-mt-5 relative z-20">
+            <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center -mt-1 md:-mt-2 relative z-20">
               {/* <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                 AMMA
               </h2> */}
