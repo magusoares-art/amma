@@ -45,7 +45,13 @@ export default function Sucesso() {
             </ul>
           </div>
 
-          <div className="flex flex-col w-full gap-3">
+          <div className="bg-slate-50 rounded-xl p-5 text-center w-full mb-8 space-y-4 border border-slate-100">
+            <h3 className="font-bold text-lg text-primary">Fortaleça nossa união</h3>
+            <p className="text-sm text-slate-700">
+              Conhece algum colega de profissão que também deseja valorizar a nossa categoria?
+              Compartilhe esta iniciativa e ajude-nos a construir uma associação ainda mais forte
+              desde a sua fundação.
+            </p>
             <Button
               asChild
               className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white h-auto py-2.5"
@@ -54,14 +60,17 @@ export default function Sucesso() {
                 href={`https://api.whatsapp.com/send?text=${shareText}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-center"
+                className="flex items-center justify-center text-center"
               >
                 <Share2 className="w-4 h-4 mr-2 shrink-0" />
-                <span className="whitespace-normal leading-tight">
-                  Envie esta oportunidade para um amigo pelo WhatsApp
+                <span className="whitespace-normal leading-tight font-medium">
+                  Enviar para um amigo
                 </span>
               </a>
             </Button>
+          </div>
+
+          <div className="flex flex-col w-full gap-3">
             <Button asChild variant="outline" className="w-full">
               <Link to="/">Voltar ao Início</Link>
             </Button>
