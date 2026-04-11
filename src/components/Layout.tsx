@@ -8,7 +8,7 @@ export default function Layout() {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
-      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
         <div className="container flex h-16 md:h-20 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-3 group">
             <div className="flex items-center">
@@ -40,7 +40,7 @@ export default function Layout() {
             </div>
             {!isFormPage && (
               <a
-                href="mailto:contato@amvvar.org.br"
+                href="mailto:amvvar@amvvar.org.br"
                 className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1"
               >
                 Suporte <ExternalLink className="h-3 w-3" />
