@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function Sucesso() {
   const shareText = encodeURIComponent(
-    'Acabei de fazer meu pré-cadastro como Membro Fundador da nova Associação de Mecânicos de Manutenção de Aeronaves! Participe você também: https://associacao-mecanicos-aeronauticos-5969c.goskip.app',
+    '✈️ *Conheça a AMMA: Associação dos Mecânicos de Manutenção de Aeronaves*\n\nOlá, colega! Você está convidado a fazer parte da fundação da nossa associação.\n\nNascemos com o apoio institucional da AMVVAR para *oferecer* suporte jurídico especializado, auxílio previdenciário, capacitação técnica e convênios exclusivos (saúde, farmácia, educação e lazer). Sua participação como *Membro Fundador* é essencial para valorizarmos nossa categoria com uma base sólida!\n\nO pré-cadastro é gratuito e leva menos de 3 minutos.\n\n🔗 *Participe aqui:* https://amma.goskip.app\n\n_Unindo forças para valorizar os Mecânicos de Aeronaves!_',
   )
 
   return (
