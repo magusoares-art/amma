@@ -59,7 +59,7 @@ export default function Index() {
             <img
               src={logoUrl}
               alt="Símbolo AMMA"
-              className="w-36 md:w-48 lg:w-56 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
+              className="w-32 md:w-40 lg:w-48 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
             />
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center -mt-1 md:-mt-2 relative z-20">
@@ -189,13 +189,12 @@ export default function Index() {
       {/* Footer Section */}
       <footer className="py-10 bg-[#0a2540] border-t border-slate-800/50">
         <div className="container px-4 md:px-6 flex flex-col items-center text-center">
-          <div className="text-xs text-slate-300/80 space-y-1.5">
+          <div className="text-sm text-slate-300/80 space-y-1.5">
             <p className="font-semibold text-slate-200 mb-2 uppercase tracking-wide">
               Faça nos uma visita:
             </p>
             <p>Estrada do Galeão, nº 2500 - Bloco A - Sala 312</p>
-            <p>Ilha do Governador - Rio de Janeiro - RJ</p>
-            <p>CEP: 21931-582</p>
+            <p>Ilha do Governador - Rio de Janeiro - RJ - CEP: 21931-582</p>
             <p className="pt-2">
               (21) 3393-4012 &nbsp;/&nbsp; (21) 2462-3561 &nbsp;/&nbsp; (21) 97008-0735 – WhatsApp
             </p>
