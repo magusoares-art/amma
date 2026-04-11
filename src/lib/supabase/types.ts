@@ -24,6 +24,7 @@ export type Database = {
           expectativa_principal: string
           formas_participacao: string[]
           id: string
+          indicou_amigo: boolean
           interesse_capacitacao: boolean
           interesse_convenios: boolean
           interesse_representacao: boolean
@@ -64,6 +65,7 @@ export type Database = {
           expectativa_principal: string
           formas_participacao?: string[]
           id?: string
+          indicou_amigo?: boolean
           interesse_capacitacao?: boolean
           interesse_convenios?: boolean
           interesse_representacao?: boolean
@@ -104,6 +106,7 @@ export type Database = {
           expectativa_principal?: string
           formas_participacao?: string[]
           id?: string
+          indicou_amigo?: boolean
           interesse_capacitacao?: boolean
           interesse_convenios?: boolean
           interesse_representacao?: boolean
@@ -387,6 +390,7 @@ export const Constants = {
 //   lgpd_veracidade: boolean (not null, default: false)
 //   created_at: timestamp with time zone (not null, default: now())
 //   status_aprovacao: text (not null, default: 'Pendente'::text)
+//   indicou_amigo: boolean (not null, default: false)
 // Table: profiles
 //   id: uuid (not null)
 //   email: text (not null)

@@ -178,7 +178,7 @@ export default function Index() {
                 <span className="font-bold text-[#DAA520] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] block mb-1">
                   Associação dos Mecânicos
                 </span>
-                <span className="font-light text-black drop-shadow-[0_0_15px_rgba(255,255,255,0.9)] block">
+                <span className="font-light text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] block">
                   de Manutenção de Aeronaves
                 </span>
               </h3>
