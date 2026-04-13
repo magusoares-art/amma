@@ -16,7 +16,7 @@ import { Step2 } from '@/components/form/Step2'
 import { Step3 } from '@/components/form/Step3'
 import { Step4 } from '@/components/form/Step4'
 import { Step5 } from '@/components/form/Step5'
-import logoUrl from '@/assets/logo-com-fundo-transp3-copia-59d64.jpg'
+import logoUrl from '@/assets/logobrsemfundopq-4e911.png'
 
 const STEPS = ['Dados Pessoais', 'Dados Profissionais', 'Benefícios', 'Engajamento', 'Finalização']
 const STORAGE_KEY = 'cadastro_form_draft'

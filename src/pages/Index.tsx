@@ -11,7 +11,7 @@ import {
   Handshake,
   UserPlus,
 } from 'lucide-react'
-import logoUrl from '@/assets/logo-1-photoroompg1-32df8.png'
+import logoUrl from '@/assets/logobrsemfundopq-4e911.png'
 
 const CARDS = [
   {
