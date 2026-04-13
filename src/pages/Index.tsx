@@ -86,10 +86,14 @@ export default function Index() {
                 muted
                 loop
                 playsInline
-                poster="https://img.usecurling.com/p/1600/900?q=aircraft%20mechanic&color=black"
+                poster="https://img.usecurling.com/p/1600/900?q=presenter&color=black"
               >
                 <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-airplane-taking-off-in-the-sky-27988-large.mp4"
+                  src="https://assets.mixkit.co/videos/preview/mixkit-young-man-speaking-in-a-video-call-or-vlog-42767-large.mp4"
+                  type="video/mp4"
+                />
+                <source
+                  src="https://assets.mixkit.co/videos/preview/mixkit-businessman-explaining-a-project-in-front-of-a-camera-34074-large.mp4"
                   type="video/mp4"
                 />
                 Seu navegador não suporta a tag de vídeo.
