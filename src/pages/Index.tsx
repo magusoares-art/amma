@@ -1,16 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import {
-  ShieldCheck,
-  HeartPulse,
-  Scale,
-  GraduationCap,
-  ChevronRight,
-  Plane,
-  Handshake,
-  UserPlus,
-} from 'lucide-react'
+import { ShieldCheck, HeartPulse, Scale, GraduationCap, ChevronRight } from 'lucide-react'
 import logoUrl from '@/assets/logobrsemfundopq-4e911.png'
 
 const CARDS = [
@@ -87,47 +78,37 @@ export default function Index() {
             <span className="text-accent">Mecânicos de Aeronaves</span>
           </h1>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-7xl text-left mt-8">
-            {/* Bloco 1 */}
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl flex flex-col hover:bg-white/10 transition-colors shadow-lg">
-              <Plane className="w-8 h-8 text-blue-400 mb-4" />
-              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
-                Os Mecânicos de Manutenção de Aeronaves sustentam, todos os dias, a segurança, a
-                disponibilidade e a confiabilidade da aviação civil brasileira. Agora, chegou o
-                momento de fortalecer essa categoria com uma associação própria, construída desde a
-                origem com participação direta dos profissionais que conhecem a operação. Promover
-                atualização técnica, troca de experiências e fortalecimento da identidade
-                profissional, com atuação baseada em excelência.
-              </p>
+          <div className="w-full max-w-4xl mx-auto mt-8 flex flex-col items-center">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8 bg-black/50">
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                poster="https://img.usecurling.com/p/1600/900?q=aircraft%20mechanic&color=black"
+              >
+                <source
+                  src="https://assets.mixkit.co/videos/preview/mixkit-airplane-taking-off-in-the-sky-27988-large.mp4"
+                  type="video/mp4"
+                />
+                Seu navegador não suporta a tag de vídeo.
+              </video>
             </div>
 
-            {/* Bloco 2 */}
-            <div className="bg-gradient-to-br from-white/10 to-transparent backdrop-blur-md border border-white/20 p-6 rounded-2xl flex flex-col hover:from-white/15 transition-colors shadow-lg">
-              <Handshake className="w-8 h-8 text-emerald-400 mb-4" />
-              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
-                Com apoio estrutural da AMVVAR, entidade com 55 anos de fundação e hoje com cerca de
-                3.000 associados, esta iniciativa nasce com base institucional sólida, experiência
-                associativa, infraestrutura de atendimento e histórico de benefícios voltados à
-                comunidade da aviação. A proposta contempla suporte organizacional para a nova
-                associação, com foco em benefícios concretos, comunicação profissional, tecnologia,
-                convênios, seguros, capacitação e apoio técnico nas pautas de interesse coletivo.
-              </p>
-            </div>
-
-            {/* Bloco 3 */}
-            <div className="bg-accent/20 backdrop-blur-md border border-accent/30 p-6 rounded-2xl flex flex-col hover:bg-accent/30 transition-colors shadow-lg">
-              <UserPlus className="w-8 h-8 text-[#DAA520] mb-4" />
-              <p className="text-sm md:text-base text-slate-200 leading-relaxed">
-                Ao se cadastrar como Associado Fundador, você demonstra interesse em participar da
-                construção de uma Associação exclusiva para os Mecânicos de Manutenção de Aeronaves,
-                tendo acesso a diversos benefícios, frentes de suporte jurídico e previdenciário
-                desde o início.
-                <br />
-                <br />O preenchimento leva menos de 3 minutos. Cadastre-se agora para receber os
-                próximos passos, acompanhar a formação da associação e registrar seu interesse como
-                fundador.
-              </p>
-            </div>
+            <Button
+              asChild
+              size="lg"
+              className="bg-accent hover:bg-accent/90 text-white text-lg h-14 px-8 rounded-full shadow-[0_0_20px_rgba(218,165,32,0.4)] hover:shadow-[0_0_30px_rgba(218,165,32,0.6)] transition-all hover:-translate-y-1"
+            >
+              <Link to="/cadastro">
+                Quero participar desde o início
+                <ChevronRight className="ml-2 w-5 h-5" />
+              </Link>
+            </Button>
+            <p className="mt-4 text-sm text-slate-300 font-medium drop-shadow-md">
+              Preencha o formulário de pré-cadastro em menos de 3 minutos.
+            </p>
           </div>
         </div>
       </section>
