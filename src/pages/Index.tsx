@@ -35,7 +35,7 @@ export default function Index() {
   return (
     <div className="flex flex-col flex-1 animate-fade-in">
       {/* Hero Section */}
-      <section className="relative bg-primary text-white pt-10 pb-20 lg:pt-16 lg:pb-32 overflow-hidden">
+      <section className="relative bg-primary text-white pt-8 pb-16 md:pt-10 md:pb-20 lg:pt-12 lg:pb-28 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://img.usecurling.com/p/1600/800?q=aircraft%20maintenance&color=black"
@@ -46,7 +46,7 @@ export default function Index() {
         </div>
 
         <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center">
-          <div className="mb-12 flex flex-col items-center w-full max-w-3xl mx-auto">
+          <div className="mb-4 md:mb-6 flex flex-col items-center w-full max-w-3xl mx-auto">
             <img
               src={logoUrl}
               alt="Símbolo AMMA"
@@ -65,7 +65,7 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="w-full max-w-4xl mx-auto mt-8 flex flex-col items-center">
+          <div className="w-full max-w-4xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8 bg-black/50">
               <video
                 className="w-full h-full object-cover"
@@ -102,7 +102,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm mt-10">
+          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm mt-6 md:mt-8">
             <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
             Apoio Institucional AMVVAR
           </div>
