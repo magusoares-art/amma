@@ -50,13 +50,10 @@ export default function Index() {
             <img
               src={logoUrl}
               alt="Símbolo AMMA"
-              className="w-32 md:w-40 lg:w-48 max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
+              className="w-[102px] md:w-[128px] lg:w-[154px] max-w-full object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
             />
 
             <div className="w-full transform transition-all hover:scale-[1.02] flex flex-col items-center -mt-1 md:-mt-2 relative z-20">
-              {/* <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-white tracking-tight uppercase text-center leading-tight mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                AMMA
-              </h2> */}
               <h3 className="text-sm md:text-base lg:text-lg tracking-widest uppercase text-center leading-tight">
                 <span className="font-bold text-[#DAA520] drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] block mb-1">
                   Associação dos Mecânicos
@@ -67,16 +64,6 @@ export default function Index() {
               </h3>
             </div>
           </div>
-
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
-            Apoio Institucional AMVVAR
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 max-w-4xl">
-            Unindo forças para valorizar os{' '}
-            <span className="text-accent">Mecânicos de Aeronaves</span>
-          </h1>
 
           <div className="w-full max-w-4xl mx-auto mt-8 flex flex-col items-center">
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8 bg-black/50">
@@ -114,6 +101,16 @@ export default function Index() {
               Preencha o formulário de pré-cadastro em menos de 3 minutos.
             </p>
           </div>
+
+          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm mt-10">
+            <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
+            Apoio Institucional AMVVAR
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 max-w-4xl">
+            Unindo forças para valorizar os{' '}
+            <span className="text-accent">Mecânicos de Aeronaves</span>
+          </h1>
         </div>
       </section>
 
