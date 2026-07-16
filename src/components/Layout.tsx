@@ -1,55 +1,8 @@
-import { Link, Outlet, useLocation } from 'react-router-dom'
-import { ExternalLink } from 'lucide-react'
-import logoUrl from '@/assets/logobrsemfundopq-4e911.png'
+import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
-  const location = useLocation()
-  const isFormPage = location.pathname.includes('/cadastro')
-
   return (
     <div className="flex flex-col min-h-screen bg-slate-50 font-sans">
-      <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
-        <div className="container flex h-16 md:h-20 items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="flex items-center">
-              <img
-                src={logoUrl}
-                alt="Logo Associação"
-                className="h-8 w-8 md:h-10 md:w-10 group-hover:scale-105 transition-transform object-contain"
-              />
-              <div className="ml-3 border-l-2 border-slate-200 pl-3 hidden sm:block">
-                <span className="block text-xs font-semibold text-primary uppercase tracking-wider leading-tight">
-                  AMMA
-                </span>
-                <span className="block text-xs text-muted-foreground leading-tight">
-                  Associação dos Mecânicos de Manutenção de Aeronaves
-                </span>
-              </div>{' '}
-            </div>
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center text-xs text-muted-foreground mr-4">
-              <span className="mr-2">Apoio Institucional:</span>
-              <img
-                src="https://img.usecurling.com/i?q=shield&shape=fill&color=orange"
-                alt="AMVVAR"
-                className="h-5 w-5 opacity-80"
-              />
-              <strong className="ml-1 text-primary">AMVVAR</strong>
-            </div>
-            {!isFormPage && (
-              <a
-                href="mailto:amvvar@amvvar.org.br"
-                className="text-sm font-medium text-primary hover:text-accent transition-colors flex items-center gap-1"
-              >
-                Suporte <ExternalLink className="h-3 w-3" />
-              </a>
-            )}
-          </div>
-        </div>
-      </header>
-
       <main className="flex-1 flex flex-col w-full">
         <Outlet />
       </main>
