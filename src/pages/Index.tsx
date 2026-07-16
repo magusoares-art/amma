@@ -102,12 +102,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm mb-6 backdrop-blur-sm mt-6 md:mt-8">
-            <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
-            Apoio Institucional AMVVAR
-          </div>
-
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 max-w-4xl mt-8">
             Unindo forças para valorizar os{' '}
             <span className="text-accent">Mecânicos de Aeronaves</span>
           </h1>
@@ -165,6 +160,16 @@ export default function Index() {
           <p className="mt-4 text-sm text-slate-500 font-medium">
             Torne-se um membro fundador hoje mesmo.
           </p>
+        </div>
+      </section>
+
+      {/* Support Bar */}
+      <section className="py-6 bg-white border-t">
+        <div className="container px-4 md:px-6 flex flex-col items-center justify-center">
+          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm">
+            <span className="flex h-2 w-2 rounded-full bg-accent mr-2 animate-pulse"></span>
+            <span className="font-medium text-slate-700">Apoio Institucional AMVVAR</span>
+          </div>
         </div>
       </section>
 
