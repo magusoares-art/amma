@@ -66,7 +66,7 @@ export default function Index() {
           </div>
 
           <div className="w-full max-w-3xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
-            <div className="relative w-full max-w-md mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
+            <div className="relative w-full max-w-[350px] mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
               <iframe
                 className="absolute inset-0 w-full h-full"
                 style={{ border: 0 }}
