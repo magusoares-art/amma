@@ -66,11 +66,11 @@ export default function Index() {
           </div>
 
           <div className="w-full max-w-3xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
+            <div className="relative w-full max-w-md mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
               <iframe
                 className="absolute inset-0 w-full h-full"
                 style={{ border: 0 }}
-                src="https://www.youtube.com/embed/QkRJ3ACih0A?rel=0&modestbranding=1"
+                src={`https://www.youtube-nocookie.com/embed/QkRJ3ACih0A?rel=0&modestbranding=1&origin=${encodeURIComponent('https://amma.goskip.app')}&origin2=${encodeURIComponent('https://associacao-mecanicos-aeronauticos-5969c--preview.goskip.app')}`}
                 title="Associação dos Mecânicos de Manutenção de Aeronaves"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
