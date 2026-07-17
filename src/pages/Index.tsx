@@ -67,24 +67,14 @@ export default function Index() {
 
           <div className="w-full max-w-4xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
             <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8 bg-black/50">
-              <video
-                className="w-full h-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="https://img.usecurling.com/p/1600/900?q=presenter&color=black"
-              >
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-young-man-speaking-in-a-video-call-or-vlog-42767-large.mp4"
-                  type="video/mp4"
-                />
-                <source
-                  src="https://assets.mixkit.co/videos/preview/mixkit-businessman-explaining-a-project-in-front-of-a-camera-34074-large.mp4"
-                  type="video/mp4"
-                />
-                Seu navegador não suporta a tag de vídeo.
-              </video>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/QkRJ3ACih0A?rel=0&modestbranding=1"
+                title="Associação dos Mecânicos de Manutenção de Aeronaves"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                loading="lazy"
+              />
             </div>
 
             <Button
