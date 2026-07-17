@@ -65,15 +65,15 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="w-full max-w-4xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl mb-8 bg-black/50">
+          <div className="w-full max-w-3xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
               <iframe
                 className="absolute inset-0 w-full h-full"
+                style={{ border: 0 }}
                 src="https://www.youtube.com/embed/QkRJ3ACih0A?rel=0&modestbranding=1"
                 title="Associação dos Mecânicos de Manutenção de Aeronaves"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-                loading="lazy"
               />
             </div>
 
