@@ -66,11 +66,15 @@ export default function Index() {
           </div>
 
           <div className="w-full max-w-3xl mx-auto mt-2 md:mt-4 flex flex-col items-center">
-            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50">
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg mb-8 bg-black/50 min-h-[200px]">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-12 h-12 border-4 border-white/20 border-t-accent rounded-full animate-spin" />
+              </div>
               <iframe
                 className="absolute inset-0 w-full h-full"
                 style={{ border: 0 }}
-                src={`https://www.youtube.com/embed/PlK1shyGhUY?rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}`}
+                frameBorder="0"
+                src="https://www.youtube.com/embed/PlK1shyGhUY?rel=0&modestbranding=1"
                 title="Associação dos Mecânicos de Manutenção de Aeronaves"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
