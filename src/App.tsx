@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as Sonner } from '@/components/ui/sonner'
@@ -12,6 +13,14 @@ import Login from './pages/Login'
 import AdminLayout from './components/admin/AdminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import { AdminAccessButton } from './components/AdminAccessButton'
+import frontImage from './assets/front-2018d.jpg'
+
+const FrontImageRedirect = () => {
+  useEffect(() => {
+    window.location.replace(frontImage)
+  }, [])
+  return null
+}
 
 const App = () => (
   <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
@@ -31,6 +40,7 @@ const App = () => (
             <Route path="dashboard" element={<AdminDashboard />} />
           </Route>
 
+          <Route path="/front.jpg" element={<FrontImageRedirect />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AdminAccessButton />
