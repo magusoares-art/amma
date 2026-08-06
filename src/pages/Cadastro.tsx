@@ -78,16 +78,29 @@ export default function Cadastro() {
   }
 
   const onSubmit = async (data: FormData) => {
+    const isValid = await form.trigger()
+    if (!isValid) {
+      toast.error('Por favor, aceite os termos e preencha todos os campos obrigatórios.')
+      return
+    }
+
     setIsSubmitting(true)
     try {
       await submitPreCadastro(data)
       localStorage.removeItem(STORAGE_KEY)
+      toast.success('Dados salvos com sucesso!')
       navigate('/sucesso')
     } catch (error: any) {
-      toast.error(error.message || 'Erro ao enviar formulário')
+      const msg = error?.message || 'Falha ao salvar dados. Por favor, tente novamente.'
+      toast.error(msg)
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const onError = (errors: any) => {
+    console.warn('Form validation failed:', errors)
+    toast.error('Por favor, aceite os termos LGPD obrigatórios e preencha todos os campos.')
   }
 
   const progress = ((currentStep + 1) / STEPS.length) * 100
@@ -117,7 +130,7 @@ export default function Cadastro() {
 
         <Card className="border-none shadow-elevation animate-scale-in bg-white/95 backdrop-blur-sm">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit, onError)}>
               <CardContent className="pt-6 min-h-[400px]">
                 {currentStep === 0 && <Step1 />}
                 {currentStep === 1 && <Step2 />}
