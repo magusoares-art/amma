@@ -7,6 +7,25 @@ DROP POLICY IF EXISTS "allow_authenticated_delete_pre_cadastros" ON public.pre_c
 CREATE POLICY "allow_authenticated_delete_pre_cadastros" ON public.pre_cadastros
   FOR DELETE TO authenticated USING (true);
 
+-- Create profiles table if it doesn't exist (required by seed migrations)
+CREATE TABLE IF NOT EXISTS public.profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT NOT NULL DEFAULT '',
+  name TEXT NOT NULL DEFAULT '',
+  is_admin BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "allow_authenticated_select_profiles" ON public.profiles;
+CREATE POLICY "allow_authenticated_select_profiles" ON public.profiles
+  FOR SELECT TO authenticated USING (true);
+
+DROP POLICY IF EXISTS "allow_authenticated_update_profiles" ON public.profiles;
+CREATE POLICY "allow_authenticated_update_profiles" ON public.profiles
+  FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+
 -- Seed admin user (idempotent)
 DO $$
 DECLARE
