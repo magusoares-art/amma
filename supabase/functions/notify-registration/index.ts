@@ -42,10 +42,9 @@ Deno.serve(async (req: Request) => {
       console.warn('Failed to send WhatsApp notification:', webhookError)
     }
 
-    return new Response(
-      JSON.stringify({ success: true, message: 'Notification processed' }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
-    )
+    return new Response(JSON.stringify({ success: true, message: 'Notification processed' }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    })
   } catch (error: any) {
     console.error('notify-registration error:', error)
     return new Response(

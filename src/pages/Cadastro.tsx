@@ -161,22 +161,23 @@ export default function Cadastro() {
                   />
                 </div>
 
-                <FormInput
-                  control={control}
-                  name="whatsapp"
-                  label="WhatsApp"
-                  placeholder="(00) 00000-0000"
-                  maskType="phone"
-                  maxLength={15}
-                />
-
-                <FormInput
-                  control={control}
-                  name="email"
-                  label="E-mail"
-                  placeholder="joao@exemplo.com"
-                  type="email"
-                />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormInput
+                    control={control}
+                    name="whatsapp"
+                    label="WhatsApp"
+                    placeholder="(00) 00000-0000"
+                    maskType="phone"
+                    maxLength={15}
+                  />
+                  <FormInput
+                    control={control}
+                    name="email"
+                    label="E-mail"
+                    placeholder="joao@exemplo.com"
+                    type="email"
+                  />
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormInput
