@@ -87,7 +87,7 @@ export default function Index() {
               className="bg-accent hover:bg-accent/90 text-white text-lg h-14 px-8 rounded-full shadow-[0_0_20px_rgba(218,165,32,0.4)] hover:shadow-[0_0_30px_rgba(218,165,32,0.6)] transition-all hover:-translate-y-1"
             >
               <Link to="/cadastro">
-                Quero participar desde o início
+                Desejo receber maiores informações
                 <ChevronRight className="ml-2 w-5 h-5" />
               </Link>
             </Button>
@@ -147,7 +147,7 @@ export default function Index() {
             className="bg-accent hover:bg-accent/90 text-white text-lg h-14 px-8 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
           >
             <Link to="/cadastro">
-              Quero participar desde o início
+              Desejo receber maiores informações
               <ChevronRight className="ml-2 w-5 h-5" />
             </Link>
           </Button>
