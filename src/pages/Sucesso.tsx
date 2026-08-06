@@ -18,19 +18,25 @@ export default function Sucesso() {
           </div>
 
           <h1 className="text-2xl font-bold text-primary mb-4">Formulário recebido com sucesso!</h1>
-          <p className="text-muted-foreground mb-8 text-left w-full">
-            Você deu um passo importante para a valorização da categoria. Agradecemos seu interesse
-            na AMMA.
-            <br />
-            Entraremos em contato pelo canal escolhido para mantê-lo atualizado.
-            <br />
-            <strong className="text-primary">
-              Fortaleça a criação da AMMA - Associação dos Mecânicos de Manutenção de Aeronaves
-            </strong>
-            <br />
-            Conhece algum colega de profissão que também deseja conhecer a AMMA?
-            <br />
-            Compartilhe esta iniciativa e ajude-nos a construir uma associação ainda mais forte.
+          <p className="text-muted-foreground mb-8 text-center w-full leading-relaxed space-y-3">
+            <span className="block">
+              Você deu um passo importante para a valorização da categoria. Agradecemos seu
+              interesse na AMMA.
+            </span>
+            <span className="block">
+              Entraremos em contato pelo canal escolhido para mantê-lo atualizado.
+            </span>
+            <span className="block pt-4">
+              <strong className="text-primary">
+                Fortaleça a criação da AMMA - Associação dos Mecânicos de Manutenção de Aeronaves
+              </strong>
+            </span>
+            <span className="block">
+              Conhece algum colega de profissão que também deseja conhecer a AMMA?
+            </span>
+            <span className="block">
+              Compartilhe esta iniciativa e ajude-nos a construir uma associação ainda mais forte.
+            </span>
           </p>
 
           <Button
