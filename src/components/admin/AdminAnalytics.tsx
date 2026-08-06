@@ -4,7 +4,15 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, PieChart, Pie, Cell, Legend
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { PreCadastro } from '@/types'
 
-const countBy = (arr: any[], key: keyof PreCadastro) => {
+const SEXO_LABELS: Record<string, string> = {
+  masculino: 'Masculino',
+  feminino: 'Feminino',
+  outro: 'Outro',
+}
+
+const PIE_COLORS = ['#0ea5e9', '#ec4899', '#8b5cf6', '#f59e0b', '#10b981']
+
+const countBy = (arr: PreCadastro[], key: keyof PreCadastro) => {
   const counts: Record<string, number> = {}
   arr.forEach((item) => {
     const val = item[key] as string
@@ -15,30 +23,42 @@ const countBy = (arr: any[], key: keyof PreCadastro) => {
     .sort((a, b) => b.value - a.value)
 }
 
-const countArrayBy = (arr: any[], key: keyof PreCadastro) => {
+const computeSexoDistribution = (data: PreCadastro[]) => {
   const counts: Record<string, number> = {}
-  arr.forEach((item) => {
-    const vals = (item[key] as string[]) || []
-    vals.forEach((val) => {
-      counts[val] = (counts[val] || 0) + 1
-    })
+  data.forEach((item) => {
+    if (item.sexo) {
+      const label = SEXO_LABELS[item.sexo] || item.sexo
+      counts[label] = (counts[label] || 0) + 1
+    }
   })
-  return Object.entries(counts)
-    .map(([name, value]) => ({ name, value }))
-    .sort((a, b) => b.value - a.value)
+  return Object.entries(counts).map(([name, value]) => ({ name, value }))
 }
 
-const PIE_COLORS = [
-  '#0ea5e9',
-  '#10b981',
-  '#f59e0b',
-  '#ef4444',
-  '#8b5cf6',
-  '#ec4899',
-  '#64748b',
-  '#14b8a6',
-  '#f43f5e',
-]
+const computeAgeGroups = (data: PreCadastro[]) => {
+  const groups: Record<string, number> = {
+    '18-25': 0,
+    '26-35': 0,
+    '36-45': 0,
+    '46-55': 0,
+    '56+': 0,
+  }
+  const now = new Date()
+  data.forEach((item) => {
+    if (!item.data_nascimento) return
+    const birth = new Date(item.data_nascimento)
+    if (isNaN(birth.getTime())) return
+    let age = now.getFullYear() - birth.getFullYear()
+    const m = now.getMonth() - birth.getMonth()
+    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--
+    if (age < 18) return
+    if (age <= 25) groups['18-25']++
+    else if (age <= 35) groups['26-35']++
+    else if (age <= 45) groups['36-45']++
+    else if (age <= 55) groups['46-55']++
+    else groups['56+']++
+  })
+  return Object.entries(groups).map(([name, value]) => ({ name, value }))
+}
 
 const BarCard = ({ title, data }: { title: string; data: any[] }) => (
   <Card>
@@ -101,35 +121,16 @@ const PieCard = ({ title, data }: { title: string; data: any[] }) => (
 
 export function AdminAnalytics({ data }: { data: PreCadastro[] }) {
   const locData = useMemo(() => countBy(data, 'uf').slice(0, 8), [data])
-  const sitData = useMemo(() => countBy(data, 'situacao_profissional'), [data])
-  const areaData = useMemo(() => countBy(data, 'area_atuacao').slice(0, 8), [data])
-  const empresaData = useMemo(
-    () =>
-      countBy(data, 'empresa')
-        .filter((d) => d.name && d.name !== 'Não informada' && d.name !== 'Não informado')
-        .slice(0, 8),
-    [data],
-  )
-  const tempoData = useMemo(() => countBy(data, 'tempo_atuacao'), [data])
-  const segData = useMemo(() => countBy(data, 'segmento'), [data])
-  const regData = useMemo(() => countArrayBy(data, 'regioes').slice(0, 8), [data])
-  const engajData = useMemo(() => countArrayBy(data, 'formas_participacao').slice(0, 8), [data])
-
-  const indCount = useMemo(() => data.filter((c) => c.indicou_amigo).length, [data])
+  const sexoData = useMemo(() => computeSexoDistribution(data), [data])
+  const ageData = useMemo(() => computeAgeGroups(data), [data])
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardContent className="pt-6">
             <div className="text-3xl font-bold">{data.length}</div>
             <p className="text-sm text-slate-500">Total de Cadastros</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-blue-600">{indCount}</div>
-            <p className="text-sm text-slate-500">Indicações Realizadas</p>
           </CardContent>
         </Card>
         <Card>
@@ -143,13 +144,8 @@ export function AdminAnalytics({ data }: { data: PreCadastro[] }) {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <BarCard title="Localidade (UF)" data={locData} />
-        <PieCard title="Situação Profissional" data={sitData} />
-        <BarCard title="Área de Habilitação" data={areaData} />
-        <BarCard title="Empresas (Top 8)" data={empresaData} />
-        <PieCard title="Tempo de Atuação" data={tempoData} />
-        <PieCard title="Segmento Principal" data={segData} />
-        <BarCard title="Regiões de Atuação" data={regData} />
-        <BarCard title="Nível de Engajamento (Participação)" data={engajData} />
+        <PieCard title="Distribuição por Sexo" data={sexoData} />
+        <BarCard title="Faixa Etária" data={ageData} />
       </div>
     </div>
   )

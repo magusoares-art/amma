@@ -4,52 +4,14 @@ export async function submitPreCadastro(data: any) {
   try {
     const payload = {
       nome: data.nome,
-      cpf: data.cpf,
+      data_nascimento: data.dataNascimento,
+      sexo: data.sexo,
       whatsapp: data.whatsapp,
       email: data.email,
       cidade: data.cidade,
       uf: data.uf,
       canal_contato: data.canalContato,
-      situacao_profissional: data.situacao || 'Não informada',
-      area_atuacao: data.area || 'Não informada',
-      licenca: data.canac || null,
-      empresa: data.empresa || null,
-      tempo_atuacao: data.tempoAtuacao || 'Não informado',
-      segmento: data.segmento || 'Não informado',
-      regioes: Array.isArray(data.regiao) ? data.regiao : [],
-      beneficios_interesse: Array.isArray(data.beneficios) ? data.beneficios : [],
-      interesse_convenios:
-        Array.isArray(data.beneficios) &&
-        data.beneficios.some(
-          (b: string) =>
-            b.toLowerCase().includes('convênio') || b.toLowerCase().includes('convenio'),
-        ),
-      interesse_seguros:
-        Array.isArray(data.beneficios) &&
-        data.beneficios.some((b: string) => b.toLowerCase().includes('seguro')),
-      interesse_capacitacao:
-        Array.isArray(data.beneficios) &&
-        data.beneficios.some((b: string) => b.toLowerCase().includes('capacita')),
-      interesse_representacao:
-        Array.isArray(data.beneficios) &&
-        data.beneficios.some((b: string) => b.toLowerCase().includes('representa')),
-      temas_juridicos: Array.isArray(data.juridicoTema) ? data.juridicoTema : [],
-      prioridade_juridica: data.juridicoPrioridade || null,
-      processo_andamento: data.juridicoProcesso || null,
-      status_caso: data.juridicoProcessoStatus || null,
-      temas_previdenciarios: Array.isArray(data.previdenciarioTema) ? data.previdenciarioTema : [],
-      pedido_inss: data.previdenciarioStatus || null,
-      resumo_necessidade: data.resumoCaso || null,
-      documentacao_organizada: data.statusDocumentacao || null,
-      melhor_horario_contato: data.melhorHorario || null,
-      formas_participacao: Array.isArray(data.estiloParticipacao) ? data.estiloParticipacao : [],
-      expectativa_principal: data.expectativas || 'Não informada',
-      comentario_adicional: data.comentarios || null,
-      lgpd_privacidade: !!data.lgpdPolitica,
-      lgpd_tratamento: !!data.lgpdTratamento,
-      lgpd_marketing: !!data.lgpdMarketing,
-      lgpd_veracidade: !!data.lgpdVeracidade,
-      indicou_amigo: !!data.indicou_amigo,
+      receber_informacoes: !!data.receberInformacoes,
     }
 
     let dbError: any = null
@@ -71,7 +33,6 @@ export async function submitPreCadastro(data: any) {
 
       const rawErrorMsg = dbError?.message || String(dbError)
 
-      // Backup local em caso de oscilação de rede
       try {
         const backups = JSON.parse(localStorage.getItem('pre_cadastros_backup') || '[]')
         backups.push({ ...payload, created_at: new Date().toISOString() })
@@ -94,7 +55,6 @@ export async function submitPreCadastro(data: any) {
       throw new Error(`Não foi possível salvar os dados. Por favor, tente novamente.`)
     }
 
-    // Disparar notificação em segundo plano sem bloquear a requisição
     try {
       supabase.functions
         .invoke('notify-registration', {

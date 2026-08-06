@@ -11,17 +11,17 @@ export type Database = {
     Tables: {
       pre_cadastros: {
         Row: {
-          area_atuacao: string
+          area_atuacao: string | null
           beneficios_interesse: string[]
           canal_contato: string
           cidade: string
           comentario_adicional: string | null
-          cpf: string
           created_at: string
+          data_nascimento: string | null
           documentacao_organizada: string | null
           email: string
           empresa: string | null
-          expectativa_principal: string
+          expectativa_principal: string | null
           formas_participacao: string[]
           id: string
           indicou_amigo: boolean
@@ -39,30 +39,32 @@ export type Database = {
           pedido_inss: string | null
           prioridade_juridica: string | null
           processo_andamento: string | null
+          receber_informacoes: boolean
           regioes: string[]
           resumo_necessidade: string | null
-          segmento: string
-          situacao_profissional: string
+          segmento: string | null
+          situacao_profissional: string | null
           status_aprovacao: string
           status_caso: string | null
+          sexo: string | null
           temas_juridicos: string[]
           temas_previdenciarios: string[]
-          tempo_atuacao: string
+          tempo_atuacao: string | null
           uf: string
           whatsapp: string
         }
         Insert: {
-          area_atuacao: string
+          area_atuacao?: string | null
           beneficios_interesse?: string[]
           canal_contato: string
           cidade: string
           comentario_adicional?: string | null
-          cpf: string
           created_at?: string
+          data_nascimento?: string | null
           documentacao_organizada?: string | null
           email: string
           empresa?: string | null
-          expectativa_principal: string
+          expectativa_principal?: string | null
           formas_participacao?: string[]
           id?: string
           indicou_amigo?: boolean
@@ -80,30 +82,32 @@ export type Database = {
           pedido_inss?: string | null
           prioridade_juridica?: string | null
           processo_andamento?: string | null
+          receber_informacoes?: boolean
           regioes?: string[]
           resumo_necessidade?: string | null
-          segmento: string
-          situacao_profissional: string
+          segmento?: string | null
+          situacao_profissional?: string | null
           status_aprovacao?: string
           status_caso?: string | null
+          sexo?: string | null
           temas_juridicos?: string[]
           temas_previdenciarios?: string[]
-          tempo_atuacao: string
+          tempo_atuacao?: string | null
           uf: string
           whatsapp: string
         }
         Update: {
-          area_atuacao?: string
+          area_atuacao?: string | null
           beneficios_interesse?: string[]
           canal_contato?: string
           cidade?: string
           comentario_adicional?: string | null
-          cpf?: string
           created_at?: string
+          data_nascimento?: string | null
           documentacao_organizada?: string | null
           email?: string
           empresa?: string | null
-          expectativa_principal?: string
+          expectativa_principal?: string | null
           formas_participacao?: string[]
           id?: string
           indicou_amigo?: boolean
@@ -121,15 +125,17 @@ export type Database = {
           pedido_inss?: string | null
           prioridade_juridica?: string | null
           processo_andamento?: string | null
+          receber_informacoes?: boolean
           regioes?: string[]
           resumo_necessidade?: string | null
-          segmento?: string
-          situacao_profissional?: string
+          segmento?: string | null
+          situacao_profissional?: string | null
           status_aprovacao?: string
           status_caso?: string | null
+          sexo?: string | null
           temas_juridicos?: string[]
           temas_previdenciarios?: string[]
-          tempo_atuacao?: string
+          tempo_atuacao?: string | null
           uf?: string
           whatsapp?: string
         }

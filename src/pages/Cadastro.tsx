@@ -2,57 +2,85 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form } from '@/components/ui/form'
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { Progress } from '@/components/ui/progress'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { toast } from 'sonner'
-import { Loader2, ArrowRight, ArrowLeft } from 'lucide-react'
-
-import { formSchema, FormData, getFieldsForStep } from '@/lib/form-schema'
+import { Loader2 } from 'lucide-react'
+import { formSchema, FormData } from '@/lib/form-schema'
 import { submitPreCadastro } from '@/lib/api'
-import { Step1 } from '@/components/form/Step1'
-import { Step2 } from '@/components/form/Step2'
-import { Step3 } from '@/components/form/Step3'
-import { Step4 } from '@/components/form/Step4'
-import { Step5 } from '@/components/form/Step5'
+import { FormInput, FormSelect } from '@/components/form/FormFields'
 import logoUrl from '@/assets/logobrsemfundopq-4e911.png'
 
-const STEPS = ['Dados Pessoais', 'Dados Profissionais', 'Benefícios', 'Engajamento', 'Finalização']
+const UF_OPTIONS = [
+  { value: 'AC', label: 'Acre' },
+  { value: 'AL', label: 'Alagoas' },
+  { value: 'AP', label: 'Amapá' },
+  { value: 'AM', label: 'Amazonas' },
+  { value: 'BA', label: 'Bahia' },
+  { value: 'CE', label: 'Ceará' },
+  { value: 'DF', label: 'Distrito Federal' },
+  { value: 'ES', label: 'Espírito Santo' },
+  { value: 'GO', label: 'Goiás' },
+  { value: 'MA', label: 'Maranhão' },
+  { value: 'MT', label: 'Mato Grosso' },
+  { value: 'MS', label: 'Mato Grosso do Sul' },
+  { value: 'MG', label: 'Minas Gerais' },
+  { value: 'PA', label: 'Pará' },
+  { value: 'PB', label: 'Paraíba' },
+  { value: 'PR', label: 'Paraná' },
+  { value: 'PE', label: 'Pernambuco' },
+  { value: 'PI', label: 'Piauí' },
+  { value: 'RJ', label: 'Rio de Janeiro' },
+  { value: 'RN', label: 'Rio Grande do Norte' },
+  { value: 'RS', label: 'Rio Grande do Sul' },
+  { value: 'RO', label: 'Rondônia' },
+  { value: 'RR', label: 'Roraima' },
+  { value: 'SC', label: 'Santa Catarina' },
+  { value: 'SP', label: 'São Paulo' },
+  { value: 'SE', label: 'Sergipe' },
+  { value: 'TO', label: 'Tocantins' },
+]
+
+const SEXO_OPTIONS = [
+  { value: 'masculino', label: 'Masculino' },
+  { value: 'feminino', label: 'Feminino' },
+  { value: 'outro', label: 'Outro' },
+]
+
 const STORAGE_KEY = 'cadastro_form_draft'
 
 export default function Cadastro() {
   const navigate = useNavigate()
-  const [currentStep, setCurrentStep] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      regiao: [],
-      beneficios: [],
-      juridicoTema: [],
-      previdenciarioTema: [],
-      estiloParticipacao: [],
-      lgpdMarketing: false,
-    },
+    defaultValues: { receberInformacoes: false },
     mode: 'onTouched',
   })
+  const { control } = form
 
-  // Load draft
   useEffect(() => {
     const draft = localStorage.getItem(STORAGE_KEY)
     if (draft) {
       try {
-        const parsed = JSON.parse(draft)
-        form.reset(parsed)
+        form.reset(JSON.parse(draft))
       } catch (e) {
         console.error('Failed to load draft')
       }
     }
   }, [form])
 
-  // Save draft
   useEffect(() => {
     const subscription = form.watch((value) => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(value))
@@ -60,30 +88,7 @@ export default function Cadastro() {
     return () => subscription.unsubscribe()
   }, [form.watch])
 
-  const handleNext = async () => {
-    const fieldsToValidate = getFieldsForStep(currentStep) as any[]
-    const isValid = await form.trigger(fieldsToValidate)
-
-    if (isValid) {
-      setCurrentStep((prev) => prev + 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      toast.error('Por favor, preencha os campos obrigatórios corretamente.')
-    }
-  }
-
-  const handlePrev = () => {
-    setCurrentStep((prev) => prev - 1)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   const onSubmit = async (data: FormData) => {
-    const isValid = await form.trigger()
-    if (!isValid) {
-      toast.error('Por favor, aceite os termos e preencha todos os campos obrigatórios.')
-      return
-    }
-
     setIsSubmitting(true)
     try {
       await submitPreCadastro(data)
@@ -91,23 +96,18 @@ export default function Cadastro() {
       toast.success('Dados salvos com sucesso!')
       navigate('/sucesso')
     } catch (error: any) {
-      const msg = error?.message || 'Falha ao salvar dados. Por favor, tente novamente.'
-      toast.error(msg)
+      toast.error(error?.message || 'Falha ao salvar dados. Por favor, tente novamente.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const onError = (errors: any) => {
-    console.warn('Form validation failed:', errors)
-    toast.error('Por favor, aceite os termos LGPD obrigatórios e preencha todos os campos.')
+  const onError = () => {
+    toast.error('Por favor, preencha todos os campos obrigatórios corretamente.')
   }
-
-  const progress = ((currentStep + 1) / STEPS.length) * 100
 
   return (
     <div className="relative flex-1 flex flex-col items-center bg-[#0a2540] overflow-hidden min-h-[calc(100vh-5rem)]">
-      {/* Watermark Background with Blue Tones */}
       <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-primary/95 mix-blend-multiply" />
         <img
@@ -118,61 +118,144 @@ export default function Cadastro() {
       </div>
 
       <div className="container max-w-2xl py-8 px-4 relative z-10 w-full">
-        <div className="mb-6 space-y-2">
-          <div className="flex justify-between items-center text-sm font-medium text-blue-100">
-            <span>
-              Passo {currentStep + 1} de {STEPS.length}
-            </span>
-            <span className="hidden sm:inline">{STEPS[currentStep]}</span>
-          </div>
-          <Progress value={progress} className="h-2 bg-blue-900/50 [&>div]:bg-white" />
-        </div>
-
         <Card className="border-none shadow-elevation animate-scale-in bg-white/95 backdrop-blur-sm">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit, onError)}>
-              <CardContent className="pt-6 min-h-[400px]">
-                {currentStep === 0 && <Step1 />}
-                {currentStep === 1 && <Step2 />}
-                {currentStep === 2 && <Step3 />}
-                {currentStep === 3 && <Step4 />}
-                {currentStep === 4 && <Step5 />}
+              <CardContent className="pt-6 space-y-4">
+                <div>
+                  <h2 className="text-xl font-bold text-primary mb-1">Pré-cadastro</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Preencha seus dados para participar da fundação da Associação.
+                  </p>
+                </div>
+
+                <FormInput
+                  control={control}
+                  name="nome"
+                  label="Nome Completo"
+                  placeholder="João da Silva"
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormInput
+                    control={control}
+                    name="dataNascimento"
+                    label="Data de Nascimento"
+                    type="date"
+                  />
+                  <FormSelect
+                    control={control}
+                    name="sexo"
+                    label="Sexo"
+                    placeholder="Selecione..."
+                    options={SEXO_OPTIONS}
+                  />
+                </div>
+
+                <FormInput
+                  control={control}
+                  name="whatsapp"
+                  label="WhatsApp"
+                  placeholder="(00) 00000-0000"
+                  maskType="phone"
+                  maxLength={15}
+                />
+
+                <FormInput
+                  control={control}
+                  name="email"
+                  label="E-mail"
+                  placeholder="joao@exemplo.com"
+                  type="email"
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormInput
+                    control={control}
+                    name="cidade"
+                    label="Cidade"
+                    placeholder="São Paulo"
+                  />
+                  <FormSelect
+                    control={control}
+                    name="uf"
+                    label="Estado (UF)"
+                    placeholder="Selecione o estado"
+                    options={UF_OPTIONS}
+                  />
+                </div>
+
+                <FormField
+                  control={control}
+                  name="canalContato"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormLabel>Melhor canal de contato</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1"
+                        >
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="whatsapp" />
+                            </FormControl>
+                            <FormLabel className="font-normal cursor-pointer">WhatsApp</FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="email" />
+                            </FormControl>
+                            <FormLabel className="font-normal cursor-pointer">E-mail</FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="ligacao" />
+                            </FormControl>
+                            <FormLabel className="font-normal cursor-pointer">
+                              Ligação telefônica
+                            </FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={control}
+                  name="receberInformacoes"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 border rounded-md">
+                      <FormControl>
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel className="cursor-pointer">
+                          Desejo receber maiores informações
+                        </FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
               </CardContent>
 
-              <CardFooter className="flex justify-between border-t bg-slate-50/80 p-6 rounded-b-xl backdrop-blur-sm">
+              <CardFooter className="flex justify-end border-t bg-slate-50/80 p-6 rounded-b-xl backdrop-blur-sm">
                 <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handlePrev}
-                  disabled={currentStep === 0 || isSubmitting}
-                  className="bg-white/80"
+                  type="submit"
+                  className="bg-accent hover:bg-accent/90 text-white font-bold shadow-md"
+                  disabled={isSubmitting}
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2" /> Voltar
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processando...
+                    </>
+                  ) : (
+                    'Cadastrar como Associado Fundador'
+                  )}
                 </Button>
-
-                {currentStep < STEPS.length - 1 ? (
-                  <Button
-                    type="button"
-                    onClick={handleNext}
-                    className="bg-primary hover:bg-primary/90 text-white shadow-md"
-                  >
-                    Próximo <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    className="bg-accent hover:bg-accent/90 text-white font-bold shadow-md"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Processando...
-                      </>
-                    ) : (
-                      'Cadastrar como Associado Fundador'
-                    )}
-                  </Button>
-                )}
               </CardFooter>
             </form>
           </Form>

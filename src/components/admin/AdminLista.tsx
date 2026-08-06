@@ -19,12 +19,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
 import { toast } from 'sonner'
 import { format, isAfter, isBefore, startOfDay, endOfDay, parseISO } from 'date-fns'
 import { PreCadastro } from '@/types'
 import { exportAssociadosCSV } from '@/lib/export'
 
 const STATUS_OPCOES = ['Pendente', 'Em análise', 'Aprovado', 'Rejeitado']
+const SEXO_LABELS: Record<string, string> = {
+  masculino: 'Masculino',
+  feminino: 'Feminino',
+  outro: 'Outro',
+}
 
 export function AdminLista({
   data,
@@ -167,20 +173,22 @@ export function AdminLista({
               <TableRow>
                 <TableHead>Data</TableHead>
                 <TableHead>Nome / Contato</TableHead>
+                <TableHead>Nasc. / Sexo</TableHead>
                 <TableHead>Localidade</TableHead>
+                <TableHead>Receber Info</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8">
+                  <TableCell colSpan={6} className="text-center py-8">
                     Carregando...
                   </TableCell>
                 </TableRow>
               ) : !filtered.length ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8">
+                  <TableCell colSpan={6} className="text-center py-8">
                     Nenhum registro encontrado.
                   </TableCell>
                 </TableRow>
@@ -197,9 +205,26 @@ export function AdminLista({
                     </TableCell>
                     <TableCell className="align-top pt-4">
                       <div className="text-sm">
+                        {c.data_nascimento
+                          ? format(new Date(c.data_nascimento), 'dd/MM/yyyy')
+                          : '—'}
+                      </div>
+                      <div className="text-xs text-slate-500">
+                        {c.sexo ? SEXO_LABELS[c.sexo] || c.sexo : '—'}
+                      </div>
+                    </TableCell>
+                    <TableCell className="align-top pt-4">
+                      <div className="text-sm">
                         {c.cidade} - {c.uf}
                       </div>
-                      <div className="text-xs text-slate-500">{c.situacao_profissional}</div>
+                    </TableCell>
+                    <TableCell className="align-top pt-4">
+                      <Badge
+                        variant={c.receber_informacoes ? 'default' : 'secondary'}
+                        className="text-xs"
+                      >
+                        {c.receber_informacoes ? 'Sim' : 'Não'}
+                      </Badge>
                     </TableCell>
                     <TableCell className="align-top pt-4">
                       <Select
