@@ -136,9 +136,9 @@ export function AdminAnalytics({ data }: { data: PreCadastro[] }) {
         <Card>
           <CardContent className="pt-6">
             <div className="text-3xl font-bold text-emerald-600">
-              {data.filter((c) => c.status_aprovacao === 'Aprovado').length}
+              {data.filter((c) => c.status_caso === 'Convertido').length}
             </div>
-            <p className="text-sm text-slate-500">Aprovados</p>
+            <p className="text-sm text-slate-500">Convertidos</p>
           </CardContent>
         </Card>
       </div>

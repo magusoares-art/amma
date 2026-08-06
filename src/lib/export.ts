@@ -19,7 +19,7 @@ export const exportAssociadosCSV = (data: PreCadastro[]) => {
     'UF',
     'Canal de Contato',
     'Receber Informações',
-    'Status Aprovação',
+    'Status do Caso',
   ]
 
   const csv = [
@@ -36,7 +36,7 @@ export const exportAssociadosCSV = (data: PreCadastro[]) => {
         escapeCSV(c.uf),
         escapeCSV(c.canal_contato),
         escapeCSV(c.receber_informacoes ? 'Sim' : 'Não'),
-        escapeCSV(c.status_aprovacao || 'Pendente'),
+        escapeCSV(c.status_caso || 'Novo'),
       ].join(';'),
     ),
   ].join('\n')

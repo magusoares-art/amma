@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
-import { Search, Download, Calendar } from 'lucide-react'
+import { Search, Download, Calendar, MessageCircle, Eye, Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -20,16 +20,37 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { toast } from 'sonner'
 import { format, isAfter, isBefore, startOfDay, endOfDay, parseISO } from 'date-fns'
 import { PreCadastro } from '@/types'
 import { exportAssociadosCSV } from '@/lib/export'
+import { AdminDetailDialog } from '@/components/admin/AdminDetailDialog'
 
-const STATUS_OPCOES = ['Pendente', 'Em análise', 'Aprovado', 'Rejeitado']
-const SEXO_LABELS: Record<string, string> = {
-  masculino: 'Masculino',
-  feminino: 'Feminino',
-  outro: 'Outro',
+const STATUS_CASO_OPCOES = ['Novo', 'Em contato', 'Convertido', 'Sem interesse']
+const getEffectiveStatus = (s?: string | null) => s || 'Novo'
+const fmtPhone = (p: string) => {
+  const d = p.replace(/\D/g, '')
+  return d.length >= 10 ? `55${d}` : d
+}
+const waUrl = (c: PreCadastro) =>
+  `https://wa.me/${fmtPhone(c.whatsapp)}?text=${encodeURIComponent(
+    `Olá ${c.nome}! Recebemos seu pré-cadastro na AMMA. Obrigado pelo interesse!`,
+  )}`
+const badgeColor = (s: string) => {
+  if (s === 'Convertido') return 'bg-emerald-100 text-emerald-800'
+  if (s === 'Em contato') return 'bg-amber-100 text-amber-800'
+  if (s === 'Sem interesse') return 'bg-rose-100 text-rose-800'
+  return 'bg-slate-100 text-slate-800'
 }
 
 export function AdminLista({
@@ -45,14 +66,25 @@ export function AdminLista({
   const [status, setStatus] = useState('all')
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
+  const [detail, setDetail] = useState<PreCadastro | null>(null)
+  const [detailOpen, setDetailOpen] = useState(false)
+  const [deleteTarget, setDeleteTarget] = useState<PreCadastro | null>(null)
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     const { error } = await supabase
       .from('pre_cadastros')
-      .update({ status_aprovacao: newStatus } as any)
+      .update({ status_caso: newStatus })
       .eq('id', id)
     if (error) return toast.error('Erro ao atualizar status')
     toast.success('Status atualizado')
+    onUpdate()
+  }
+
+  const handleDelete = async (id: string) => {
+    const { error } = await supabase.from('pre_cadastros').delete().eq('id', id)
+    if (error) return toast.error('Erro ao excluir cadastro')
+    toast.success('Cadastro excluído')
+    setDeleteTarget(null)
     onUpdate()
   }
 
@@ -61,8 +93,7 @@ export function AdminLista({
       data.filter((c) => {
         const q = search.toLowerCase()
         const matchSearch = c.nome.toLowerCase().includes(q) || c.email.toLowerCase().includes(q)
-        const currentStatus = c.status_aprovacao || 'Pendente'
-        const matchStatus = status === 'all' || currentStatus === status
+        const matchStatus = status === 'all' || getEffectiveStatus(c.status_caso) === status
         let matchDate = true
         if (start)
           matchDate = matchDate && isAfter(new Date(c.created_at), startOfDay(parseISO(start)))
@@ -72,41 +103,35 @@ export function AdminLista({
     [data, search, status, start, end],
   )
 
-  const getBadgeColor = (s: string) => {
-    if (s === 'Aprovado') return 'bg-emerald-100 text-emerald-800'
-    if (s === 'Em análise') return 'bg-amber-100 text-amber-800'
-    if (s === 'Rejeitado') return 'bg-rose-100 text-rose-800'
-    return 'bg-slate-100 text-slate-800'
-  }
+  const stats = [
+    { label: 'Total', val: data.length, color: 'text-primary' },
+    {
+      label: 'Novos',
+      val: data.filter((c) => getEffectiveStatus(c.status_caso) === 'Novo').length,
+      color: 'text-slate-600',
+    },
+    {
+      label: 'Em Contato',
+      val: data.filter((c) => c.status_caso === 'Em contato').length,
+      color: 'text-amber-600',
+    },
+    {
+      label: 'Convertidos',
+      val: data.filter((c) => c.status_caso === 'Convertido').length,
+      color: 'text-emerald-600',
+    },
+  ]
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { label: 'Total', val: data.length, color: 'text-primary' },
-          {
-            label: 'Aprovados',
-            val: data.filter((c) => c.status_aprovacao === 'Aprovado').length,
-            color: 'text-emerald-600',
-          },
-          {
-            label: 'Em Análise',
-            val: data.filter((c) => c.status_aprovacao === 'Em análise').length,
-            color: 'text-amber-600',
-          },
-          {
-            label: 'Pendentes',
-            val: data.filter((c) => !c.status_aprovacao || c.status_aprovacao === 'Pendente')
-              .length,
-            color: 'text-slate-600',
-          },
-        ].map((stat) => (
-          <Card key={stat.label} className="border-none shadow-sm">
+        {stats.map((s) => (
+          <Card key={s.label} className="border-none shadow-sm">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-slate-500">{stat.label}</CardTitle>
+              <CardTitle className="text-sm font-medium text-slate-500">{s.label}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className={`text-2xl font-bold ${stat.color}`}>{stat.val}</div>
+              <div className={`text-2xl font-bold ${s.color}`}>{s.val}</div>
             </CardContent>
           </Card>
         ))}
@@ -131,7 +156,7 @@ export function AdminLista({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">Todos</SelectItem>
-                  {STATUS_OPCOES.map((o) => (
+                  {STATUS_CASO_OPCOES.map((o) => (
                     <SelectItem key={o} value={o}>
                       {o}
                     </SelectItem>
@@ -173,29 +198,30 @@ export function AdminLista({
               <TableRow>
                 <TableHead>Data</TableHead>
                 <TableHead>Nome / Contato</TableHead>
-                <TableHead>Nasc. / Sexo</TableHead>
                 <TableHead>Localidade</TableHead>
-                <TableHead>Receber Info</TableHead>
+                <TableHead>Nasc.</TableHead>
+                <TableHead>Canal</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead>Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">
+                  <TableCell colSpan={7} className="text-center py-8">
                     Carregando...
                   </TableCell>
                 </TableRow>
               ) : !filtered.length ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">
+                  <TableCell colSpan={7} className="text-center py-8">
                     Nenhum registro encontrado.
                   </TableCell>
                 </TableRow>
               ) : (
                 filtered.map((c) => (
                   <TableRow key={c.id}>
-                    <TableCell className="align-top whitespace-nowrap pt-4">
+                    <TableCell className="align-top whitespace-nowrap pt-4 text-sm">
                       {format(new Date(c.created_at), 'dd/MM/yyyy')}
                     </TableCell>
                     <TableCell className="align-top pt-4">
@@ -203,47 +229,69 @@ export function AdminLista({
                       <div className="text-sm text-slate-500">{c.email}</div>
                       <div className="text-xs text-slate-400">{c.whatsapp}</div>
                     </TableCell>
-                    <TableCell className="align-top pt-4">
-                      <div className="text-sm">
-                        {c.data_nascimento
-                          ? format(new Date(c.data_nascimento), 'dd/MM/yyyy')
-                          : '—'}
-                      </div>
-                      <div className="text-xs text-slate-500">
-                        {c.sexo ? SEXO_LABELS[c.sexo] || c.sexo : '—'}
-                      </div>
+                    <TableCell className="align-top pt-4 text-sm">
+                      {c.cidade} - {c.uf}
                     </TableCell>
-                    <TableCell className="align-top pt-4">
-                      <div className="text-sm">
-                        {c.cidade} - {c.uf}
-                      </div>
+                    <TableCell className="align-top pt-4 text-sm">
+                      {c.data_nascimento ? format(new Date(c.data_nascimento), 'dd/MM/yyyy') : '—'}
                     </TableCell>
-                    <TableCell className="align-top pt-4">
-                      <Badge
-                        variant={c.receber_informacoes ? 'default' : 'secondary'}
-                        className="text-xs"
-                      >
-                        {c.receber_informacoes ? 'Sim' : 'Não'}
-                      </Badge>
+                    <TableCell className="align-top pt-4 text-sm capitalize">
+                      {c.canal_contato || '—'}
                     </TableCell>
                     <TableCell className="align-top pt-4">
                       <Select
-                        value={c.status_aprovacao || 'Pendente'}
+                        value={getEffectiveStatus(c.status_caso)}
                         onValueChange={(v) => handleStatusChange(c.id, v)}
                       >
                         <SelectTrigger
-                          className={`h-8 w-[140px] text-xs font-medium border-none ${getBadgeColor(c.status_aprovacao || 'Pendente')}`}
+                          className={`h-8 w-[130px] text-xs font-medium border-none ${badgeColor(getEffectiveStatus(c.status_caso))}`}
                         >
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          {STATUS_OPCOES.map((o) => (
+                          {STATUS_CASO_OPCOES.map((o) => (
                             <SelectItem key={o} value={o}>
                               {o}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
+                    </TableCell>
+                    <TableCell className="align-top pt-4">
+                      <div className="flex items-center gap-1">
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          title="Contactar via WhatsApp"
+                        >
+                          <a href={waUrl(c)} target="_blank" rel="noopener noreferrer">
+                            <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                          </a>
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          title="Ver detalhes"
+                          onClick={() => {
+                            setDetail(c)
+                            setDetailOpen(true)
+                          }}
+                        >
+                          <Eye className="w-4 h-4 text-slate-600" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          title="Excluir"
+                          onClick={() => setDeleteTarget(c)}
+                        >
+                          <Trash2 className="w-4 h-4 text-red-500" />
+                        </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))
@@ -252,6 +300,29 @@ export function AdminLista({
           </Table>
         </CardContent>
       </Card>
+
+      <AdminDetailDialog record={detail} open={detailOpen} onOpenChange={setDetailOpen} />
+
+      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmar exclusão</AlertDialogTitle>
+            <AlertDialogDescription>
+              Tem certeza que deseja excluir o cadastro de <strong>{deleteTarget?.nome}</strong>?
+              Esta ação não pode ser desfeita.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-red-600 hover:bg-red-700"
+              onClick={() => deleteTarget && handleDelete(deleteTarget.id)}
+            >
+              Excluir
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

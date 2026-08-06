@@ -9,7 +9,6 @@ export type PreCadastro = {
   data_nascimento: string | null
   sexo: string | null
   receber_informacoes: boolean
-  status_aprovacao?: string
   created_at: string
   situacao_profissional?: string | null
   area_atuacao?: string | null

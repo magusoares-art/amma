@@ -1,3 +1,6 @@
 {
-  "_versions": {}
+  "_versions": {
+    "notify-registration": 1,
+    "manage-users": 1
+  }
 }

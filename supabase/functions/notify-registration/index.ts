@@ -1,11 +1,5 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts'
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers':
-    'authorization, x-client-info, x-supabase-client-platform, apikey, content-type',
-}
+import { corsHeaders } from '../_shared/cors.ts'
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
@@ -14,21 +8,48 @@ Deno.serve(async (req: Request) => {
 
   try {
     const payload = await req.json()
-    console.log('New registration notification hook triggered:', payload)
 
-    // Aqui seria implementada a integração com um provedor de e-mail (ex: Resend, SendGrid)
-    // para notificar a equipe da nova inscrição.
-    // Exemplo:
-    // const resend = new Resend(Deno.env.get('RESEND_API_KEY'));
-    // await resend.emails.send({ ... })
+    const webhookUrl = Deno.env.get('WHATSAPP_WEBHOOK_URL')
 
-    return new Response(JSON.stringify({ success: true, message: 'Notification hook processed' }), {
+    if (!webhookUrl) {
+      console.log('WhatsApp webhook URL not configured. Skipping notification.')
+      return new Response(
+        JSON.stringify({ success: true, message: 'Webhook not configured, notification skipped' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      )
+    }
+
+    const message = [
+      '🛩️ *Novo pré-cadastro recebido!*\n',
+      `*Nome:* ${payload.nome || 'N/A'}`,
+      `*E-mail:* ${payload.email || 'N/A'}`,
+      `*WhatsApp:* ${payload.whatsapp || 'N/A'}`,
+      `*Cidade:* ${payload.cidade || 'N/A'} - ${payload.uf || 'N/A'}`,
+      `*Canal de contato:* ${payload.canal_contato || 'N/A'}`,
+    ].join('\n')
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: message, data: payload }),
+      })
+
+      if (!response.ok) {
+        console.warn(`Webhook returned status ${response.status}`)
+      }
+    } catch (webhookError) {
+      console.warn('Failed to send WhatsApp notification:', webhookError)
+    }
+
+    return new Response(JSON.stringify({ success: true, message: 'Notification processed' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
   } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      status: 400,
-    })
+    console.error('notify-registration error:', error)
+    return new Response(
+      JSON.stringify({ success: true, message: 'Notification skipped due to error' }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+    )
   }
 })

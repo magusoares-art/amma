@@ -58,7 +58,7 @@ export async function submitPreCadastro(data: any) {
     try {
       supabase.functions
         .invoke('notify-registration', {
-          body: { nome: data.nome, email: data.email },
+          body: payload,
         })
         .catch((err) => {
           console.warn('Non-blocking notify function error:', err)
