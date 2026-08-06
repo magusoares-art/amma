@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { CheckCircle2, Share2, ArrowRight } from 'lucide-react'
+import { CheckCircle2, Share2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Sucesso() {
@@ -17,64 +17,42 @@ export default function Sucesso() {
             <CheckCircle2 className="w-10 h-10 text-success animate-bounce" />
           </div>
 
-          <h1 className="text-2xl font-bold text-primary mb-2">
-            Pré-cadastro realizado com sucesso!
-          </h1>
-          <p className="text-muted-foreground mb-8">
-            Você deu um passo importante para a valorização da nossa categoria. Obrigado por se
-            juntar a nós como Membro Fundador.
+          <h1 className="text-2xl font-bold text-primary mb-4">Formulário recebido com sucesso!</h1>
+          <p className="text-muted-foreground mb-8 text-left w-full">
+            Você deu um passo importante para a valorização da categoria. Agradecemos seu interesse
+            na AMMA.
+            <br />
+            Entraremos em contato pelo canal escolhido para mantê-lo atualizado.
+            <br />
+            <strong className="text-primary">
+              Fortaleça a criação da AMMA - Associação dos Mecânicos de Manutenção de Aeronaves
+            </strong>
+            <br />
+            Conhece algum colega de profissão que também deseja conhecer a AMMA?
+            <br />
+            Compartilhe esta iniciativa e ajude-nos a construir uma associação ainda mais forte.
           </p>
 
-          <div className="bg-slate-50 rounded-xl p-5 text-left w-full mb-8 space-y-3">
-            <h3 className="font-semibold text-sm uppercase tracking-wider text-slate-500 mb-2">
-              Próximos Passos
-            </h3>
-            <ul className="text-sm space-y-2 text-slate-700">
-              <li className="flex gap-2">
-                <ArrowRight className="w-4 h-4 text-accent shrink-0 mt-0.5" /> Nossa equipe
-                realizará o seu cadastro.
-              </li>
-              <li className="flex gap-2">
-                <ArrowRight className="w-4 h-4 text-accent shrink-0 mt-0.5" /> Entraremos em contato
-                pelo canal escolhido para atualizar sobre a fundação oficial.
-              </li>
-              <li className="flex gap-2">
-                <ArrowRight className="w-4 h-4 text-accent shrink-0 mt-0.5" /> Fique atento ao seu
-                WhatsApp ou E-mail.
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-slate-50 rounded-xl p-5 text-center w-full mb-8 space-y-4 border border-slate-100">
-            <h3 className="font-bold text-lg text-primary">Fortaleça nossa união</h3>
-            <p className="text-sm text-slate-700">
-              Conhece algum colega de profissão que também deseja valorizar a nossa categoria?
-              Compartilhe esta iniciativa e ajude-nos a construir uma associação ainda mais forte
-              desde a sua fundação.
-            </p>
-            <Button
-              asChild
-              className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white h-auto py-2.5"
+          <Button
+            asChild
+            className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white h-auto py-2.5 mb-3"
+          >
+            <a
+              href={`https://api.whatsapp.com/send?text=${shareText}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center text-center"
             >
-              <a
-                href={`https://api.whatsapp.com/send?text=${shareText}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center text-center"
-              >
-                <Share2 className="w-4 h-4 mr-2 shrink-0" />
-                <span className="whitespace-normal leading-tight font-medium">
-                  Enviar para um amigo
-                </span>
-              </a>
-            </Button>
-          </div>
+              <Share2 className="w-4 h-4 mr-2 shrink-0" />
+              <span className="whitespace-normal leading-tight font-medium">
+                Enviar para um amigo
+              </span>
+            </a>
+          </Button>
 
-          <div className="flex flex-col w-full gap-3">
-            <Button asChild variant="outline" className="w-full">
-              <Link to="/">Voltar ao Início</Link>
-            </Button>
-          </div>
+          <Button asChild variant="outline" className="w-full">
+            <Link to="/">Voltar ao Início</Link>
+          </Button>
         </CardContent>
       </Card>
     </div>
