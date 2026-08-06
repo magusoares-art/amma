@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
-import { maskCpf, maskPhone } from '@/lib/masks'
+import { maskCpf, maskPhone, maskDate } from '@/lib/masks'
 
 export function FormInput({ control, name, label, placeholder, maskType, ...props }: any) {
   return (
@@ -34,6 +34,7 @@ export function FormInput({ control, name, label, placeholder, maskType, ...prop
                 let val = e.target.value
                 if (maskType === 'cpf') val = maskCpf(val)
                 if (maskType === 'phone') val = maskPhone(val)
+                if (maskType === 'date') val = maskDate(val)
                 field.onChange(val)
               }}
             />

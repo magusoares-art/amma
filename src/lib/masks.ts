@@ -16,3 +16,12 @@ export const maskPhone = (value: string) => {
   }
   return v
 }
+
+export const maskDate = (value: string) => {
+  let v = value.replace(/\D/g, '')
+  if (v.length <= 8) {
+    v = v.replace(/(\d{2})(\d)/, '$1/$2')
+    v = v.replace(/(\d{2})(\d)/, '$1/$2')
+  }
+  return v
+}

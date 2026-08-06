@@ -150,7 +150,10 @@ export default function Cadastro() {
                     control={control}
                     name="dataNascimento"
                     label="Data de Nascimento"
-                    type="date"
+                    placeholder="DD/MM/AAAA"
+                    maskType="date"
+                    maxLength={10}
+                    inputMode="numeric"
                   />
                   <FormSelect
                     control={control}

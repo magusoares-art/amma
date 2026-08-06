@@ -4,7 +4,9 @@ export async function submitPreCadastro(data: any) {
   try {
     const payload = {
       nome: data.nome,
-      data_nascimento: data.dataNascimento,
+      data_nascimento: data.dataNascimento
+        ? data.dataNascimento.split('/').reverse().join('-')
+        : null,
       sexo: data.sexo,
       whatsapp: data.whatsapp,
       email: data.email,
