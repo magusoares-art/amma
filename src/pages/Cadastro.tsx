@@ -134,7 +134,7 @@ export default function Cadastro() {
                 <div>
                   <h2 className="text-xl font-bold text-primary mb-1">Pré-cadastro</h2>
                   <p className="text-sm text-muted-foreground">
-                    Preencha seus dados para participar da fundação da Associação.
+                    Preencha seus dados abaixo para receber mais informações..
                   </p>
                 </div>
 
