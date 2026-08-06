@@ -131,20 +131,22 @@ export default function Cadastro() {
                     label="Sexo"
                     options={SEXO_OPTIONS}
                   />
-                  <FormInput
-                    control={form.control}
-                    name="whatsapp"
-                    label="WhatsApp"
-                    placeholder="(00) 00000-0000"
-                    maskType="phone"
-                  />
-                  <FormInput
-                    control={form.control}
-                    name="email"
-                    label="E-mail"
-                    placeholder="seu@email.com"
-                    type="email"
-                  />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormInput
+                      control={form.control}
+                      name="whatsapp"
+                      label="WhatsApp"
+                      placeholder="(00) 00000-0000"
+                      maskType="phone"
+                    />
+                    <FormInput
+                      control={form.control}
+                      name="email"
+                      label="E-mail"
+                      placeholder="seu@email.com"
+                      type="email"
+                    />
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="sm:col-span-2">
                       <FormInput
