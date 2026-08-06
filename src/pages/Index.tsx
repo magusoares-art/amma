@@ -92,7 +92,7 @@ export default function Index() {
               </Link>
             </Button>
             <p className="mt-4 text-sm text-slate-300 font-medium drop-shadow-md">
-              Preencha o formulário de pré-cadastro em menos de 3 minutos.
+              Preencha o formulário de pré-cadastro em menos de 1 minuto.
             </p>
           </div>
 

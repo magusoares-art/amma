@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { maskCpf, maskPhone, maskDate } from '@/lib/masks'
 
 export function FormInput({ control, name, label, placeholder, maskType, ...props }: any) {
@@ -68,6 +69,39 @@ export function FormSelect({ control, name, label, options, placeholder }: any) 
               ))}
             </SelectContent>
           </Select>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  )
+}
+
+export function FormRadioGroup({ control, name, label, options, description }: any) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          {description && <FormDescription>{description}</FormDescription>}
+          <FormControl>
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+              value={field.value}
+              className="flex flex-wrap gap-4 pt-2"
+            >
+              {options.map((opt: any) => (
+                <FormItem key={opt.value} className="flex items-center space-x-2 space-y-0">
+                  <FormControl>
+                    <RadioGroupItem value={opt.value} />
+                  </FormControl>
+                  <FormLabel className="font-normal cursor-pointer">{opt.label}</FormLabel>
+                </FormItem>
+              ))}
+            </RadioGroup>
+          </FormControl>
           <FormMessage />
         </FormItem>
       )}
