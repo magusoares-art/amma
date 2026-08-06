@@ -54,7 +54,6 @@ const UF_OPTIONS = [
 const SEXO_OPTIONS = [
   { value: 'masculino', label: 'Masculino' },
   { value: 'feminino', label: 'Feminino' },
-  { value: 'outro', label: 'Outro' },
 ]
 
 const STORAGE_KEY = 'cadastro_form_draft'
@@ -65,7 +64,17 @@ export default function Cadastro() {
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: { receberInformacoes: false },
+    defaultValues: {
+      nome: '',
+      dataNascimento: '',
+      sexo: '',
+      whatsapp: '',
+      email: '',
+      cidade: '',
+      uf: '',
+      canalContato: undefined,
+      receberInformacoes: false,
+    },
     mode: 'onTouched',
   })
   const { control } = form
