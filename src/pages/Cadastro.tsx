@@ -16,7 +16,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
-import { FormInput, FormRadioGroup, FormSelect } from '@/components/form/FormFields'
+import { FormInput, FormRadioGroup } from '@/components/form/FormFields'
 import { submitPreCadastro } from '@/lib/api'
 
 const UF_OPTIONS = [
@@ -153,12 +153,31 @@ export default function Cadastro() {
                         placeholder="Sua cidade"
                       />
                     </div>
-                    <FormSelect
+                    <FormField
                       control={form.control}
                       name="uf"
-                      label="UF"
-                      options={UF_OPTIONS}
-                      placeholder="Selecione"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>UF</FormLabel>
+                          <FormControl>
+                            <select
+                              className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              value={field.value || ''}
+                              onChange={field.onChange}
+                            >
+                              <option value="" disabled>
+                                Selecione
+                              </option>
+                              {UF_OPTIONS.map((opt) => (
+                                <option key={opt.value} value={opt.value}>
+                                  {opt.label}
+                                </option>
+                              ))}
+                            </select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
                   <FormRadioGroup

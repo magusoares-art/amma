@@ -10,7 +10,13 @@ const SEXO_LABELS: Record<string, string> = {
   outro: 'Outro',
 }
 
-const PIE_COLORS = ['#0ea5e9', '#ec4899', '#8b5cf6', '#f59e0b', '#10b981']
+const SEXO_COLORS: Record<string, string> = {
+  Masculino: '#0ea5e9',
+  Feminino: '#ec4899',
+  Outro: '#8b5cf6',
+}
+
+const DEFAULT_PIE_COLOR = '#94a3b8'
 
 const countBy = (arr: PreCadastro[], key: keyof PreCadastro) => {
   const counts: Record<string, number> = {}
@@ -119,8 +125,8 @@ const PieCard = ({ title, data }: { title: string; data: any[] }) => (
             outerRadius={80}
             paddingAngle={2}
           >
-            {data.map((_, i) => (
-              <Cell key={`cell-${i}`} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+            {data.map((entry, i) => (
+              <Cell key={`cell-${i}`} fill={SEXO_COLORS[entry.name] || DEFAULT_PIE_COLOR} />
             ))}
           </Pie>
           <ChartTooltip content={<ChartTooltipContent />} />
