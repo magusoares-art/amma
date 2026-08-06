@@ -34,14 +34,22 @@ const computeSexoDistribution = (data: PreCadastro[]) => {
   return Object.entries(counts).map(([name, value]) => ({ name, value }))
 }
 
+const AGE_BRACKETS = [
+  '0-18',
+  '19-23',
+  '24-28',
+  '29-33',
+  '34-38',
+  '39-43',
+  '44-48',
+  '49-53',
+  '54-58',
+  '59+',
+] as const
+
 const computeAgeGroups = (data: PreCadastro[]) => {
-  const groups: Record<string, number> = {
-    '18-25': 0,
-    '26-35': 0,
-    '36-45': 0,
-    '46-55': 0,
-    '56+': 0,
-  }
+  const groups: Record<string, number> = {}
+  AGE_BRACKETS.forEach((b) => (groups[b] = 0))
   const now = new Date()
   data.forEach((item) => {
     if (!item.data_nascimento) return
@@ -50,14 +58,18 @@ const computeAgeGroups = (data: PreCadastro[]) => {
     let age = now.getFullYear() - birth.getFullYear()
     const m = now.getMonth() - birth.getMonth()
     if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--
-    if (age < 18) return
-    if (age <= 25) groups['18-25']++
-    else if (age <= 35) groups['26-35']++
-    else if (age <= 45) groups['36-45']++
-    else if (age <= 55) groups['46-55']++
-    else groups['56+']++
+    if (age <= 18) groups['0-18']++
+    else if (age <= 23) groups['19-23']++
+    else if (age <= 28) groups['24-28']++
+    else if (age <= 33) groups['29-33']++
+    else if (age <= 38) groups['34-38']++
+    else if (age <= 43) groups['39-43']++
+    else if (age <= 48) groups['44-48']++
+    else if (age <= 53) groups['49-53']++
+    else if (age <= 58) groups['54-58']++
+    else groups['59+']++
   })
-  return Object.entries(groups).map(([name, value]) => ({ name, value }))
+  return AGE_BRACKETS.map((name) => ({ name, value: groups[name] }))
 }
 
 const BarCard = ({ title, data }: { title: string; data: any[] }) => (
