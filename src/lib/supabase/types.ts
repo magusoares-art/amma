@@ -15,7 +15,132 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      pre_cadastros: {
+        Row: {
+          area_atuacao: string | null
+          beneficios_interesse: string[]
+          canal_contato: string
+          cidade: string
+          comentario_adicional: string | null
+          created_at: string
+          data_nascimento: string | null
+          documentacao_organizada: string | null
+          email: string
+          empresa: string | null
+          expectativa_principal: string | null
+          formas_participacao: string[]
+          id: string
+          interesse_capacitacao: boolean
+          interesse_convenios: boolean
+          interesse_representacao: boolean
+          interesse_seguros: boolean
+          lgpd_marketing: boolean
+          lgpd_privacidade: boolean
+          lgpd_tratamento: boolean
+          lgpd_veracidade: boolean
+          licenca: string | null
+          melhor_horario_contato: string | null
+          nome: string
+          pedido_inss: string | null
+          prioridade_juridica: string | null
+          processo_andamento: string | null
+          receber_informacoes: boolean
+          regioes: string[]
+          resumo_necessidade: string | null
+          segmento: string | null
+          sexo: string | null
+          situacao_profissional: string | null
+          status_caso: string | null
+          temas_juridicos: string[]
+          temas_previdenciarios: string[]
+          tempo_atuacao: string | null
+          uf: string
+          whatsapp: string
+        }
+        Insert: {
+          area_atuacao?: string | null
+          beneficios_interesse?: string[]
+          canal_contato: string
+          cidade: string
+          comentario_adicional?: string | null
+          created_at?: string
+          data_nascimento?: string | null
+          documentacao_organizada?: string | null
+          email: string
+          empresa?: string | null
+          expectativa_principal?: string | null
+          formas_participacao?: string[]
+          id?: string
+          interesse_capacitacao?: boolean
+          interesse_convenios?: boolean
+          interesse_representacao?: boolean
+          interesse_seguros?: boolean
+          lgpd_marketing?: boolean
+          lgpd_privacidade?: boolean
+          lgpd_tratamento?: boolean
+          lgpd_veracidade?: boolean
+          licenca?: string | null
+          melhor_horario_contato?: string | null
+          nome: string
+          pedido_inss?: string | null
+          prioridade_juridica?: string | null
+          processo_andamento?: string | null
+          receber_informacoes?: boolean
+          regioes?: string[]
+          resumo_necessidade?: string | null
+          segmento?: string | null
+          sexo?: string | null
+          situacao_profissional?: string | null
+          status_caso?: string | null
+          temas_juridicos?: string[]
+          temas_previdenciarios?: string[]
+          tempo_atuacao?: string | null
+          uf: string
+          whatsapp: string
+        }
+        Update: {
+          area_atuacao?: string | null
+          beneficios_interesse?: string[]
+          canal_contato?: string
+          cidade?: string
+          comentario_adicional?: string | null
+          created_at?: string
+          data_nascimento?: string | null
+          documentacao_organizada?: string | null
+          email?: string
+          empresa?: string | null
+          expectativa_principal?: string | null
+          formas_participacao?: string[]
+          id?: string
+          interesse_capacitacao?: boolean
+          interesse_convenios?: boolean
+          interesse_representacao?: boolean
+          interesse_seguros?: boolean
+          lgpd_marketing?: boolean
+          lgpd_privacidade?: boolean
+          lgpd_tratamento?: boolean
+          lgpd_veracidade?: boolean
+          licenca?: string | null
+          melhor_horario_contato?: string | null
+          nome?: string
+          pedido_inss?: string | null
+          prioridade_juridica?: string | null
+          processo_andamento?: string | null
+          receber_informacoes?: boolean
+          regioes?: string[]
+          resumo_necessidade?: string | null
+          segmento?: string | null
+          sexo?: string | null
+          situacao_profissional?: string | null
+          status_caso?: string | null
+          temas_juridicos?: string[]
+          temas_previdenciarios?: string[]
+          tempo_atuacao?: string | null
+          uf?: string
+          whatsapp?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
